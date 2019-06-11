@@ -1,0 +1,217 @@
+/*! ########## 5.2 Templates ########## */
+
+// All styles that used under /templates folder files
+// and the entire documentation demo files
+
+.bb-headpanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+
+.bb-rightpanel {
+  position: fixed;
+  width: 240px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: #fff;
+  border-left: 1px solid $gray-lighter;
+  overflow-y: auto;
+  padding: 90px 25px 25px;
+  @include transform(translateX(240px));
+
+  .menu-right {
+    display: block !important;
+    padding-bottom: 25px;
+
+    .nav-link { padding-left: 0; }
+
+    .btn {
+      display: block;
+      > span { display: inline-block !important; }
+    }
+  }
+
+  .dropdown > .nav-link{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    position: static;
+    display: none !important;
+    border: 0;
+  }
+
+  .dropdown.show {
+    .dropdown-menu { display: block !important; }
+  }
+
+  // dark version
+  &.dark {
+    background-color: darken($brand-inverse, 5%);
+    border-left: 0;
+
+    .dropdown-menu { background-color: transparent !important; }
+  }
+}
+
+.bb-headpanel,
+.bb-mainpanel,
+.bb-rightpanel {
+  @include transition($transition-base);
+}
+
+@include media-breakpoint-down(md) {
+  .show-bb-menu {
+    overflow: hidden;
+
+    .bb-headpanel,
+    .bb-mainpanel {
+      @include transform(translateX(-240px));
+    }
+
+    .bb-rightpanel {
+      @include transform(translateX(0));
+      @include transition($transition-base);
+    }
+  }
+}
+
+.menu-label {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: $font-family-roboto;
+  margin-bottom: 10px;
+  color: $gray-dark;
+  letter-spacing: .5px;
+}
+
+.section-label {
+  font-size: $font-size-xs;
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
+
+  + figure { margin-bottom: 20px; }
+}
+
+//datepicker inline
+.dp-col-4 {
+  .datepicker { width: auto; }
+  .datepicker--nav { min-height: 40px; }
+  .datepicker--cell { height: 40px; }
+}
+
+.dp-minimal,
+.dp-dark {
+  .datepicker {
+    border: 0;
+    @include border-radius(0);
+    font-family: $font-family-roboto;
+  }
+
+  .datepicker--nav-action {
+    width: 40px;
+    @include border-radius(0);
+  }
+
+  .datepicker--nav-title {
+    @include border-radius(0);
+    padding: 0 15px;
+  }
+
+  .datepicker--cell {
+    @include border-radius(0);
+    font-family: $font-family-arimo;
+  }
+}
+
+.dp-minimal {
+  .datepicker--nav {
+    background-color: lighten($gray-lightest, 4%);
+    border-bottom: 0;
+  }
+}
+
+.dp-dark {
+  .datepicker {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .datepicker--nav {
+    background-color: rgba(#000, .1);
+    border-bottom: 0;
+  }
+
+  .datepicker--nav-action,
+  .datepicker--nav-title {
+    @include transition($transition-base);
+
+    &:hover,
+    &:focus { background-color: rgba(#fff, .1)}
+  }
+  .datepicker--nav-action path { stroke: #fff; }
+  .datepicker--nav-title i { color: rgba(#fff, 0.6); }
+
+  .datepicker--day-name { color: #fff; }
+  .datepicker--cell {
+    color: rgba(#fff, .7);
+    @include transition($transition-base);
+
+    &.-current- {
+      color: #fff;
+      background-color: rgba(#fff, .1);
+    }
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: rgba(#fff, .1);
+    }
+  }
+}
+
+
+//svg fix an extra space below of peity chart
+.svg-block + svg.peity {
+  display: block;
+  margin-bottom: -1px;
+  margin-right: -1px;
+}
+
+
+// E-commerce
+.elem-size-selection { display: block; }
+.elem-size-selection-link {
+  font-size: $font-size-xs;
+  width: 30px;
+  display: inline-block;
+  background-color: $gray-lightest;
+  color: $gray;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    background-color: $gray;
+    color: #fff;
+  }
+}
+
+// Typography
+.code-base {
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}

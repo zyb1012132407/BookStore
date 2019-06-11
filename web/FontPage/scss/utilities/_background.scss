@@ -1,0 +1,78 @@
+/*! ########## 4.1 Background ########## */
+
+.bg-transparent { background-color: transparent; }
+.bg-transparent-force { background-color: transparent !important; }
+
+.bg-gray-darker { background-color: darken($gray-dark, 3%); }
+.bg-gray-dark { background-color: $gray-dark; }
+.bg-gray-dark-light { background-color: lighten($gray-dark, 5%); }
+.bg-gray { background-color: $gray; }
+.bg-gray-light { background-color: $gray-light; }
+.bg-gray-lighter { background-color: $gray-lighter; }
+.bg-gray-lightest { background-color: $gray-lightest; }
+.bg-white { background-color: #fff; }
+.bg-black { background-color: #000; }
+
+.bg-gray-darker-force { background-color: darken($gray-dark, 3%) !important; }
+.bg-gray-dark-force { background-color: $gray-dark !important; }
+.bg-gray-dark-light-force { background-color: lighten($gray-dark, 5%) !important; }
+.bg-gray-force { background-color: $gray !important; }
+.bg-gray-light-force { background-color: $gray-light !important; }
+.bg-gray-lighter-force { background-color: $gray-lighter !important; }
+.bg-gray-lightest-force { background-color: $gray-lightest !important; }
+.bg-white-force { background-color: #fff !important; }
+.bg-black-force { background-color: #000 !important; }
+
+@include bg-opacity('inverse', $brand-inverse);
+@include bg-opacity('white', #fff);
+@include bg-opacity('black', #000);
+
+// additional background goes here.
+.bg-superlight { background-color: #f1f3f6; }
+.bg-indigo { background-color: $color-indigo; }
+.bg-indigo-light { background-color: $color-indigo-light; }
+.bg-maroon { background-color: $color-maroon; }
+.bg-orange { background-color: $color-orange; }
+.bg-turquiose { background-color: $color-turquiose; }
+.bg-teal { background-color: $color-teal; }
+.bg-pink { background-color: $color-pink; }
+.bg-pink-light { background-color: $color-pink-light; }
+.bg-yellow { background-color: $color-yellow; }
+
+//background gradient
+.bg-mantle { @include gradient-x(#514A9D, #24C6DC); }
+.bg-reef { @include gradient-x(#3a7bd5, #00d2ff); }
+.bg-transfile { @include gradient-x(#CB3066, #16BFFD); }
+.bg-neon { @include gradient-x(#12FFF7, #B3FFAB); }
+.bg-delicate { @include gradient-x(#E9E4F0, #D3CCE3); }
+.bg-purple { @include gradient-x(#753a88, #cc2b5e); }
+.bg-emerald { @include gradient-x(#56B4D3, #348F50); }
+.bg-mojito { @include gradient-x(#1D976C, #93F9B9); }
+.bg-dance { @include gradient-x(#F9D423, #FF4E50); }
+.bg-teal-love { @include gradient-x(#11FFBD, #AAFFA9); }
+.bg-crystal-clear { @include gradient-x(#155799, #159957); }
+.bg-grandeur { @include gradient-x(#000046, #1CB5E0); }
+.bg-flickr { @include gradient-x(#33001b, #e20477); }
+.bg-royal { @include gradient-x(#141E30, #243B55); }
+
+@mixin background-breakpoint($viewport) {
+  .bg-#{$viewport}-transparent { background-color: transparent; }
+  .bg-#{$viewport}-white { background-color: #fff; }
+  .bg-#{$viewport}-superlight { background-color: #f1f3f6; }
+  .bg-#{$viewport}-gray-darker { background-color: darken($gray-dark, 3%); }
+  .bg-#{$viewport}-gray-dark { background-color: $gray-dark; }
+  .bg-#{$viewport}-gray-dark-light { background-color: lighten($gray-dark, 5%); }
+  .bg-#{$viewport}-gray { background-color: $gray; }
+
+  .bg-#{$viewport}-transparent-force { background-color: transparent !important; }
+
+  @include bg-opacity($viewport + "-inverse", $brand-inverse);
+  @include bg-opacity($viewport + "-white", #fff);
+  @include bg-opacity($viewport + '-black', #000);
+}
+
+@media (min-width: 480px) { @include background-breakpoint("xs"); }
+@include media-breakpoint-up(sm) { @include background-breakpoint("sm"); }
+@include media-breakpoint-up(md) { @include background-breakpoint("md"); }
+@include media-breakpoint-up(lg) { @include background-breakpoint("lg"); }
+@include media-breakpoint-up(xl) { @include background-breakpoint("xl"); }

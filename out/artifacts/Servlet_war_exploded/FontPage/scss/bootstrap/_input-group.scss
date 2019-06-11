@@ -1,0 +1,39 @@
+/*! ########## 3.12 Input Group ########## */
+
+.input-group {
+  input-group-addon:first-child { @include border-right-radius(0); }
+}
+.input-group-addon {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+
+  .custom-control {
+    padding-left: 1rem;
+    margin: 0;
+  }
+}
+
+.input-group-inverse {
+  .form-control {
+    background-color: rgba(#000,.1);
+    color: #fff;
+    border: 0;
+
+    &::-webkit-input-placeholder { color: rgba(#fff,.6); }
+    &:-moz-placeholder {
+      color: rgba(#fff,.6);
+      opacity: 1;
+    }
+    &::-moz-placeholder {
+      color: rgba(#fff,.6);
+      opacity: 1;
+    }
+    &:-ms-input-placeholder { color: rgba(#fff,.6); }
+  }
+
+  .input-group-btn .btn {
+    background-color: rgba(#000,.1);
+    color: #fff;
+    border: 0;
+  }
+}

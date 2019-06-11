@@ -1,0 +1,114 @@
+
+@mixin bg-opacity($class-slug, $color) {
+  @for $i from 1 through 9 {
+    .bg-opacity-#{$class-slug}-#{$i} {
+      background-color: rgba($color, 0 + ($i * 0.1)) !important;
+    }
+  }
+}
+
+@mixin table-full-colored-variant($color) {
+  background-color: lighten($color, 40%);
+  > thead > tr {
+    > th,
+    > td { background-color: $color; }
+  }
+  > tbody > tr {
+    > th,
+    > td { color: darken($color, 20%); }
+  }
+}
+
+@mixin accordion-head-variant($color) {
+  .card-header a { background-color: $color; }
+  .card-header a.collapsed { color: $color; }
+}
+
+@mixin nav-colored-variant($color) {
+  .nav-link {
+    color: $color;
+    &:hover,
+    &:focus { color: darken($color, 10%); }
+
+    //&.active {
+      //&,&:hover,
+      //&:focus { color: $active-color; }
+    //}
+  }
+
+  &.nav-pills {
+    .nav-link.active {
+      &,
+      &:hover,
+      &:focus { color: #fff; }
+    }
+  }
+}
+
+@mixin pagination-variant($color) {
+  .page-link { color: $color; }
+  .active {
+    .page-link {
+      background-color: $color;
+      border-color: transparent;
+    }
+  }
+}
+
+@mixin popover-title-variant($color) {
+  .popover-title {
+    background-color: $color;
+    color: #fff;
+    border-color: transparent;
+    margin: -1px -1px 0;
+  }
+
+  &.popover-bottom {
+    &::after,
+    &.bs-tether-element-attached-top::after {
+      border-bottom-color: $color;
+    }
+  }
+}
+
+@mixin popover-full-variant($color) {
+  background-color: $color;
+  border-color: $color;
+
+  .popover-title {
+    border-color: transparent;
+    padding-bottom: 0;
+    color: #fff;
+  }
+
+  .popover-content {
+    color: rgba(#fff, .75);
+    padding-top: 13px;
+    padding-bottom: 14px;
+  }
+
+  &.popover-top::after,
+  &.bs-tether-element-attached-bottom::after {
+    border-top-color: $color;
+  }
+
+  &.popover-top::before,
+  &.bs-tether-element-attached-bottom::before {
+    border-top-color: $color;
+  }
+
+  &.popover-bottom::after,
+  &.bs-tether-element-attached-top::after {
+    border-bottom-color: $color;
+  }
+}
+
+@mixin iconwrap-size($padding, $icon-size) {
+  padding: $padding;
+  .fa,
+  .icon {
+    font-size: $icon-size;
+    width: $icon-size;
+    height: $icon-size;
+  }
+}

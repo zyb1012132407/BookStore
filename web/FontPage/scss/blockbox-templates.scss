@@ -1,0 +1,211 @@
+// Bootstrap Overrides
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Bootstrap
+@import "../bower_components/bootstrap/scss/mixins";
+@import "../bower_components/bootstrap/scss/variables";
+
+$header-height:       70px;
+$breadcrumb-height:   70px;
+$leftpanel-bg:        #202634;
+
+.section-label {
+  font-size: $font-size-xs;
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
+
+  + figure { margin-bottom: 20px; }
+}
+
+.nav-docs {
+  margin-bottom: 20px;
+
+  .nav-link {
+    color: $gray;
+    font-size: 13px; //$font-size-xs;
+    padding: 4px 0;
+
+    .fa,
+    .icon {
+      margin-right: 5px;
+    }
+
+    &:hover,
+    &:focus { color: $brand-primary; }
+
+    &.active { color: $brand-primary; }
+  }
+}
+
+// Button Components demo
+.btn-primary.hover {
+  background-color: darken($brand-primary, 10%);
+  border-color: darken($brand-primary, 12%);
+}
+.btn-success.hover {
+  background-color: darken($brand-success, 10%);
+  border-color: darken($brand-success, 12%);
+}
+.btn-warning.hover {
+  background-color: darken($brand-warning, 10%);
+  border-color: darken($brand-warning, 12%);
+}
+.btn-danger.hover {
+  background-color: darken($brand-danger, 10%);
+  border-color: darken($brand-danger, 12%);
+}
+.btn-info.hover {
+  background-color: darken($brand-info, 10%);
+  border-color: darken($brand-info, 12%);
+}
+.btn-inverse.hover {
+  background-color: darken($brand-inverse, 10%);
+  border-color: darken($brand-inverse, 12%);
+}
+.btn-pink.hover {
+  background-color: darken($color-pink, 10%);
+  border-color: darken($color-pink, 12%);
+}
+.btn-gray-lighter.hover {
+  background-color: darken($gray-lighter, 10%);
+  border-color: darken($gray-lighter, 12%);
+}
+.btn-yellow.hover {
+  background-color: darken($color-yellow, 10%);
+  border-color: darken($color-yellow, 12%);
+}
+.btn-orange.hover {
+  background-color: darken($color-orange, 10%);
+  border-color: darken($color-orange, 12%);
+}
+.btn-maroon.hover {
+  background-color: darken($color-maroon, 10%);
+  border-color: darken($color-maroon, 12%);
+}
+.btn-teal.hover {
+  background-color: darken($color-teal, 10%);
+  border-color: darken($color-teal, 12%);
+}
+
+
+.popover-relative .popover {
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-bg-demo {
+  .overlay-block {
+    font-size: $font-size-xs;
+    color: #fff;
+    padding-top: 25px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
+}
+
+.table-utilitiy-demo {
+  tbody > tr {
+    > td { font-family: $font-family-roboto; }
+  }
+}
+
+.card-components {
+  font-size: $font-size-sm;
+  .img-component {
+    display: block;
+    @include transition($transition-base);
+
+    img {
+      opacity: .5;
+      @include transition($transition-base);
+    }
+
+    h6 {
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 14px;
+      color: $gray-dark;
+      margin-bottom: 0;
+    }
+
+    ul li { padding: 2px 0; }
+  }
+
+  ul {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-size: 12px;
+      color: $gray;
+    }
+  }
+
+  .card {
+    padding: 5px;
+    @include border-radius(0);
+  }
+
+  .card-block {
+    padding: 20px 15px 15px;
+  }
+}
+
+// Nav blocks
+.nav-blocks {
+  .nav-link {
+    color: $gray-light;
+    font-size: $font-size-xs;
+    padding: 5px 0;
+
+
+    &:hover,
+    &:focus {
+      color: $gray;
+    }
+
+    &.active {
+      &,
+      &:hover,
+      &:focus {
+        color: $brand-primary;
+      }
+    }
+  }
+
+  .nav-item { padding: 0 10px; }
+  .nav-item:first-child { padding-left: 0; }
+  .nav-item:last-child { padding-right: 0; }
+}
+
+// Pages
+.bg-gray-dark .link-list {
+  a {
+    color: darken($gray-light,10%);
+    &:hover,
+    &:focus { color: $brand-primary; }
+  }
+}
+
+// Modal
+.modal-static { z-index: 1; }
+
+.demo-icons {
+  .fa,.icon {
+    @media (max-width: 991px) {
+      font-size: 32px;
+    }
+  }
+}
+
+// For demo purpose only
+// Used in templates/index.html
+.img-home {
+  @include border-top-radius(3px);
+  box-shadow: 0 0 40px rgba(0,0,0,.2);
+}

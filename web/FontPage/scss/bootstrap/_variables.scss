@@ -1,0 +1,90 @@
+// Body
+$body-bg:                       #fff;
+$body-color:                    #727780;
+
+// Border
+$border-radius:                 3px;
+
+// Buttons
+$btn-padding-x:                 1.5rem;
+$btn-padding-y:                 0.625rem;
+$btn-padding-x-sm:              1.2rem;
+$btn-padding-y-sm:              0.6rem;
+$btn-padding-x-lg:              1.75rem;
+$btn-padding-y-lg:              0.875rem;
+
+// Card
+$card-border-color:             #D8DCE3;
+$card-border-radius:            3px;
+$card-cap-bg:                   #fff;
+
+// Color
+$brand-primary:                 #0866C6;
+$brand-success:                 #23bf08;
+$brand-warning:                 #f49917;
+$brand-danger:                  #e65c58;
+$brand-info:                    #1695f5;
+$brand-inverse:                 #282c35;
+
+$black:                         #171819;
+$gray-dark:                     #282c35;
+$gray:                          #585c64;
+$gray-light:                    #989da8;
+$gray-lighter:                  #D8DCE3;
+$gray-lightest:                 lighten($gray-lighter, 6%);
+
+// Color addons
+$color-pink:                    #EF4056;
+$color-yellow:                  #fbd41d;
+$color-orange:                  #fc5503;
+$color-turquiose:               #08c6da;
+$color-teal:                    #059faf;
+$color-indigo:                  #5d3b94;
+$color-indigo-light:            #AC10ED;
+$color-maroon:                  #780505;
+$color-pink-light:              #FA77B0;
+$color-flesh:                   #EEC2B7;
+$color-info-light:              #BDD0E9;
+
+// Fonts
+$font-family-merriweather:     'Merriweather', serif;
+$font-family-poppins:          'Poppins', sans-serif;
+$font-family-roboto:           'Roboto', sans-serif;
+$font-family-opensans:         'Open Sans', sans-serif;
+$font-family-rubik:            'Rubik', sans-serif;
+$font-family-aldrich:          'Aldrich',sans-serif;
+$font-family-arimo:            'Arimo', sans-serif;
+$font-family-fjallaone:        'Fjalla One', sans-serif;
+
+$font-family-zillaslab:        'Zilla Slab', serif;
+$font-family-playball:         'Playball', cursive;
+$font-family-engagement:       'Engagement', cursive;
+$font-family-yesteryear:       'Yesteryear', cursive;
+
+$font-family-base:              $font-family-roboto;
+$font-family-serif:             $font-family-merriweather;
+
+// Forms
+$input-padding-y:               0.625rem;
+$input-padding-x-lg:            1rem;
+$input-color:                   $gray-dark;
+
+// Form states and alerts
+$state-success-bg:              lighten($brand-success, 40%);
+$state-success-border:          lighten($brand-success, 35%);
+
+$state-info-bg:                 lighten($brand-primary, 40%);
+$state-info-border:             lighten($brand-primary, 35px);
+
+$state-warning-bg:              lighten($brand-warning, 30%);
+$state-warning-border:          lighten($brand-warning, 25%);
+
+$state-danger-bg:               lighten($brand-danger, 25%);
+$state-danger-border:           lighten($brand-danger, 20%);
+
+// Grid
+$grid-gutter-width-base:        20px;
+$line-height-base:              1.65;
+
+// Jumbotron
+$jumbotron-padding:             1.5rem;

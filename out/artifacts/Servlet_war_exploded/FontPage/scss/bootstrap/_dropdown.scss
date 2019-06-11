@@ -1,0 +1,59 @@
+/*! ########## 3.7 Dropdown ########## */
+
+.dropdown.wide {
+  position: static;
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+}
+
+.dropdown-menu {
+  padding: 7px;
+  border-color: rgba($gray-lighter, .5);
+  @include border-radius();
+}
+
+.dropdown-item {
+  padding: 7px 1rem;
+  @include transition($transition-base);
+  @include border-radius(2px);
+}
+
+.dropdown-menu-inverse {
+  .dropdown-item {
+    color: $gray-light;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: darken($gray-dark, 5%);
+    }
+  }
+}
+
+.dropdown-header {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: $font-size-xs;
+  padding: 10px 1.5rem; //$dropdown-item-padding-x;
+  margin: -7px -7px 7px;
+  border-bottom: 1px solid $gray-lighter;
+  @include border-top-radius($border-radius);
+}
+
+.dropdown-footer {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.dropdown-divider {
+  margin: 7px -7px;
+}
+
+.dropdown-media {
+  margin: -7px -7px 7px;
+  padding: 15px 1.25rem;
+  border-bottom: 1px solid $gray-lighter;
+}

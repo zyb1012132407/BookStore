@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>提交订单</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/select2/css/select2.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+  </style>
+</head>
+
+<body class="pd-t-70">
+<div id="app" v-cloak>
+  <div class="bb-headpanel bg-white ht-70 d-flex align-items-center shadow-1">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+
+      <!-- menu button display for mobile only -->
+      <a id="showBbMenu" class="hidden-lg-up tx-inverse lh-0" href=""><i class="fa fa-navicon tx-size-18"></i></a>
+
+      <div class="menu-right d-lg-flex align-items-center tx-size-14 hidden-md-down">
+
+        <!-- logo for mobile display only -->
+        <div class="ht-70 shadow-1 pos-absolute-top d-flex align-items-center pd-x-25 hidden-lg-up">
+          <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+        </div>
+
+        <nav class="nav nav-gray nav-active-primary align-items-start align-items-lg-center flex-column flex-lg-row tx-size-12 tx-uppercase tx-medium tx-spacing-1 mg-r-20">
+          <a href="index.html" class="nav-link">主页</a>
+          <a href="notice-board.html" class="nav-link">公告</a>
+          <a href="shop-pages.html" class="nav-link">商店</a>
+        </nav>
+
+        <a href="cart.html" class="btn btn-pink rounded-2 mg-t-20 mg-lg-t-0 mg-lg-r-10 pd-x-15 bd-0">
+          <span class="tx-uppercase tx-size-11 tx-spacing-2 mg-r-10 hidden-lg-down">购物车</span>
+          <i class="icon ion-bag"></i>
+        </a>
+        <div class="d-flex bd btn align-items-center justify-content-center mg-t-10 mg-lg-t-0 pd-x-15 rounded-2">
+          <span v-if="isLogin_user" class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a class="text-muted" href="dashboard-userIndex.html">个人中心</a></span>
+          <span v-else class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a class="text-muted" href="sign-in.html">登录</a></span>
+        </div>
+      </div>
+    </div><!-- container -->
+  </div><!-- headpanel -->
+
+  <div class="bb-mainpanel">
+
+    <div class="container-wrapper pd-y-40 pd-lg-y-60">
+      <div class="container">
+        <div class="d-sm-flex justify-content-between align-items-center">
+          <div>
+            <h3 class="tx-inverse tx-size-40 tx-bold mg-b-5">确认订单</h3>
+            <p class="mg-b-0">请您确认购买的物品，并提交订单</p>
+          </div>
+          <a href="cart.html" class="btn btn-gray-light bd-0s tx-uppercase tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">返回购物车 <i class="fa fa-angle-right mg-l-5"></i></a>
+        </div><!-- d-flex -->
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+    <div class="container pd-b-60 tx-size-sm">
+      <div class="row row-lg flex-row-reverse">
+        <div class="col-lg-12">
+
+
+        <ul class="list-group">
+
+        <li v-if="carts.length > 0" v-for="elem in carts" class="list-group-item">
+          <div class="col-lg-10" >
+            <img v-bind:src="'../../file/image/book/' + elem.ISBN + '/' + '1.png' " class="img-fluid mg-r-15" onerror="this.src='http://via.placeholder.com/1276x1920'" style=" width: 50px;height: 50px;" >
+            <div style="display: inline-block;">书名：{{elem.name}}&nbsp;ISBN：{{elem.ISBN}}<br>单本价格:￥{{elem.price}}</div>
+          </div>
+          <div class="col-lg-2">
+            <div class="input-group bootstrap-touchspin" style="width: 130px;">
+              <input type="text" v-bind:value="elem.num + '本'" class="form-control mx-auto" style="display: block;" readonly>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="list-group-item ">
+          收件人：
+          <div class="input-group mg-b-15 col-lg-4 mb20">
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user op7"></i></span>
+            <input v-model="DI_informations.DI_name" type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+          </div>
+          <div class="col-lg-12"></div>
+          联系电话:
+          <div class="input-group mg-b-15 col-lg-4 mb20">
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-comments"></i></span>
+            <input v-model="DI_informations.DI_phonenumber" type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1">
+          </div>
+          <div class="col-lg-12"></div>
+          收货地址:
+          <div class="input-group mg-b-15 col-lg-4 mb20">
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-home"></i></span>
+            <textarea v-model="DI_informations.DI_position" rows="3" class="form-control" placeholder="Home"></textarea>
+            <!-- <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"> -->
+          </div>
+        </li>
+
+
+
+        <li class="list-group-item">
+          <div class="col-lg-10">  </div>
+          <div class="col-lg-2">
+            <div>总计价格:{{allCost}}</div>
+            <button v-on:click="confirmPurchase()" class="btn btn-info mg-t-5 mg-t-5 l-20" style="width: 110px;">提交订单</button>
+          </div>
+        </li>
+
+        
+
+      </ul>
+
+        </div>
+      </div><!-- row -->
+    </div><!-- container -->
+
+    <div class="container-wrapper bg-gray-darker pd-y-40">
+      <div class="container tx-center">
+        <span class="tx-size-xs">&copy; 2019 网上书城项目.</span>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+  </div><!-- bb-mainpanel -->
+</div>
+
+    <script>
+      var vm = new Vue({
+        el:"#app",
+        data(){
+          return {
+            allCost:0,
+            carts:null,
+            isLogin_user:false,
+            DI_informations:{
+              DI_name:null,
+              DI_position:null,
+              DI_phonenumber:null,
+            },
+          }
+        },
+        created:async function(){
+          await this.isLogin();
+          await this.showAll();
+
+        },
+        methods:{
+          	isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+
+                  if(res.body[0].isLogin != null){
+                    if((String(res.body[0].isLogin)).indexOf("true") != -1){
+                      this.isLogin_user = true;
+                    }else{
+                      this.isLogin_user = false;
+                      alert("您未登录，将直接跳转到登录页面");
+                      this.routeForNewWeb();
+                    }
+                  }else{
+                    this.isLogin_user = false;
+                    alert("您未登录，将直接跳转到登录页面");
+                    this.routeForNewWeb();
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+
+            showAll: async function(){
+              await this.$http.post('/Servlet/CartManagerServlet', {
+                  type:"showAll",
+                }, {emulateJSON: true}).then(function (res){
+                    this.carts=res.body;
+                    console.log(res.body);
+                }, function (res) {
+                    console.log(res.status);
+                });
+                this.countPrice();
+            },
+
+            countPrice:function(){
+              this.allCost = 0;
+              if(this.carts == null){
+                this.allCost = 0;
+              }else{
+                for(let i =0;i<this.carts.length;i++){
+                  this.allCost += this.carts[i].price * this.carts[i].num;
+                }
+              }
+            },
+            
+            confirmPurchase:async function(){
+              console.log(this.allCost);
+              console.log(this.DI_informations);
+              await this.$http.post('/Servlet/ConfirmPurchaseServlet', {
+                  type:"submit",
+                  cost:this.allCost,
+                  submitInformation:this.DI_informations,
+                }, {emulateJSON: true}).then(function (res){
+                  if(res.body.indexOf("success")!= -1){
+                    alert("提交成功！");
+                    this.routeForShopWeb();
+                  }
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+
+            routeForNewWeb:function(){
+              window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+            },
+            routeForShopWeb:function(){
+              window.location.href = '/Servlet/FontPage/pages/shop-pages.html';
+            },
+
+
+        },
+
+    watch:{
+        
+      },
+
+
+      })
+    </script>
+
+
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../js/blockbox.js"></script>
+  <script src="../lib/select2/js/select2.min.js"></script>
+</body>
+</html>

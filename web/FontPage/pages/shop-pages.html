@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>商城</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/select2/css/select2.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+    .modal-backdrop{z-index:0;}
+  </style>
+</head>
+
+<body class="pd-t-70">
+<div id="app">
+  <!-- <div v-for="t2 in test2">
+    <h1>{{t2}}</h1>
+  </div> -->
+  <!-- <div v-if="t in test2.splice(4,4)">
+    <h1>{{t}}</h1>
+  </div> -->
+  <div class="bb-headpanel bg-white ht-70 d-flex align-items-center shadow-1">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+
+      <!-- menu button display for mobile only -->
+      <a id="showBbMenu" class="hidden-lg-up tx-inverse lh-0" href=""><i class="fa fa-navicon tx-size-18"></i></a>
+
+      <div class="menu-right d-lg-flex align-items-center tx-size-14 hidden-md-down">
+
+        <!-- logo for mobile display only -->
+        <div class="ht-70 shadow-1 pos-absolute-top d-flex align-items-center pd-x-25 hidden-lg-up">
+          <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+        </div>
+
+        <nav class="nav nav-gray nav-active-primary align-items-start align-items-lg-center flex-column flex-lg-row tx-size-12 tx-uppercase tx-medium tx-spacing-1 mg-r-20">
+          <a href="index.html" class="nav-link">主页</a>
+          <a href="notice-board.html" class="nav-link">公告</a>
+          <a href="#" class="nav-link active">商店</a>
+        </nav>
+
+        <a href="cart.html" class="btn btn-pink rounded-2 mg-t-20 mg-lg-t-0 mg-lg-r-10 pd-x-15 bd-0">
+          <span class="tx-uppercase tx-size-11 tx-spacing-2 mg-r-10 hidden-lg-down">购物车</span>
+          <i class="icon ion-bag"></i>
+        </a>
+        <div class="d-flex bd btn align-items-center justify-content-center mg-t-10 mg-lg-t-0 pd-x-15 rounded-2">
+          <span v-if="isLogin_user" class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a class="text-muted" href="dashboard-userIndex.html">个人中心</a></span>
+          <span v-else class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a class="text-muted" href="sign-in.html">登录</a></span>
+        </div>
+      </div>
+    </div><!-- container -->
+  </div><!-- headpanel -->
+
+  <div class="bb-mainpanel">
+
+    <div class="container-wrapper pd-y-40 pd-lg-y-60">
+      <div class="container">
+        <div class="d-sm-flex justify-content-between align-items-center">
+          <div>
+            <h3 class="tx-inverse tx-size-40 tx-bold mg-b-5">商城</h3>
+            <p class="mg-b-0">我们的书,多到超出你的想象.</p>
+          </div>
+          <a href="../templates/shop.html" class="btn btn-gray-light bd-0 tx-uppercase tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">查看我们服务 <i class="fa fa-angle-right mg-l-5"></i></a>
+        </div><!-- d-flex -->
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container pd-b-60 tx-size-sm">
+      <div class="row row-lg flex-row-reverse">
+        <div class="col-lg-9">
+          <div class="d-md-flex justify-content-between align-items-center">
+            <ol class="breadcrumb bg-transparent rounded-0 pd-0 mg-b-0 tx-size-xs">
+              <li class="breadcrumb-item"><a href="#" class="tx-gray-light">主页</a></li>
+              <!-- <li class="breadcrumb-item"><a href="#" class="tx-gray-light">书城</a></li> -->
+              <li class="breadcrumb-item active tx-inverse">书城</li>
+            </ol>
+            <!-- <div class="mg-t-10 mg-md-t-0">
+              <select class="form-control select2 select2-xs" data-placeholder="Sort by">
+                <option value="1">{{v-for循环记录}</option>
+                <option value="2">Trending</option>
+                <option value="3">Most Popular</option>
+                <option value="4">Date Added</option>
+                <option value="5">Brand</option>
+              </select>
+            </div> -->
+          </div><!-- d-flex -->
+
+          <div class="card-deck card-deck-sm mg-t-40">
+
+
+            <div v-for="book in topBooks" class="card rounded-0 pd-x-5" style="position：relative;">
+              <figure class="shop-item">
+                <img v-bind:src="'../../file/image/book/' + book.ISBN + '/' + '1.png' " class="img-fluid" onerror="this.src='http://via.placeholder.com/1276x1920'" style="height:282px;">
+                <!-- <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt=""> -->
+                <figcaption class="overlay-block d-flex justify-content-center align-items-center">
+                  <div class="shop-item-button">
+                    <a href="#" v-on:click="addCart(book.ISBN)" class="btn btn-primary bd-0"><i class="fa fa-shopping-cart mg-r-0"></i>加入购物车</a>
+                  </div><!-- shop-item-button -->
+                  <a href="#" v-on:click="selected_book = book" class="quick-view-button" data-toggle="modal" data-target="#modal"><i class="icon ion-ios-plus-outline"></i>查看概览</a>
+                </figcaption><!-- overlay-block -->
+              </figure><!-- overlay -->
+              <div class="card-block pd-15 tx-center">
+                <h6 class="tx-size-xs mg-b-5"><a href="" class="tx-inverse">{{book.bName}}</a></h6>
+                <p class="tx-size-12 tx-danger mg-b-5">￥{{book.price}}</p>
+                <p class="tx-yellow mg-b-0">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </p>
+              </div><!-- card-block -->
+            </div><!-- card -->
+
+            <div v-for="i in 4-topBooks.length" class="card rounded-0 pd-x-5">
+              <figure class="shop-item">
+                <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt="">
+                <figcaption class="overlay-block d-flex justify-content-center align-items-center">
+                  <div class="shop-item-button">
+                    <a href="#" class="btn btn-danger bd-0">待添加</a>
+                  </div><!-- shop-item-button -->
+                  <!-- <a href="" class="quick-view-button" data-toggle="modal" data-target="#modal"><i class="icon ion-ios-plus-outline"></i> Quick View</a> -->
+                </figcaption><!-- overlay-block -->
+              </figure>
+              <div class="card-block pd-15 tx-center">
+                <h6 class="tx-size-xs mg-b-5"><a href="" class="tx-inverse">待添加</a></h6>
+                <p class="tx-size-12 tx-danger mg-b-5">￥暂无</p>
+                <p class="tx-yellow mg-b-0">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </p>
+              </div><!-- card-block -->
+            </div><!-- card -->
+
+          </div><!-- card-deck -->
+
+          <div class="card-deck card-deck-sm mg-t-10">
+
+            <div v-for="book in buttonBooks" class="card rounded-0 pd-x-5">
+              <figure class="shop-item">
+                <img v-bind:src="'../../file/image/book/' + book.ISBN + '/' + '1.png' " class="img-fluid" onerror="this.src='http://via.placeholder.com/1276x1920'" style="height:282px;">
+                <!-- <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt=""> -->
+                <figcaption class="overlay-block d-flex justify-content-center align-items-center">
+                  <div class="shop-item-button">
+                    <a href="#" v-on:click="addCart(book.ISBN)" class="btn btn-primary bd-0"><i class="fa fa-shopping-cart mg-r-0"></i>加入购物车</a>
+                  </div><!-- shop-item-button -->
+                  <a v-on:click="selected_book = book" href="#" class="quick-view-button" data-toggle="modal" data-target="#modal"><i class="icon ion-ios-plus-outline"></i> Quick View</a>
+                </figcaption><!-- overlay-block -->
+              </figure>
+              <div class="card-block pd-15 tx-center">
+                <h6 class="tx-size-xs mg-b-5"><a href="" class="tx-inverse">{{book.bName}}</a></h6>
+                <p class="tx-size-12 tx-danger mg-b-5">￥{{book.price}}</p>
+                <p class="tx-yellow mg-b-0">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </p>
+              </div><!-- card-block -->
+            </div><!-- card -->
+
+
+            <div v-for="i in 4-buttonBooks.length" class="card rounded-0 pd-x-5">
+              <figure class="shop-item">
+                <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt="">
+                <figcaption class="overlay-block d-flex justify-content-center align-items-center">
+                  <div class="shop-item-button">
+                    <a href="" class="btn btn-danger bd-0">待添加</a>
+                  </div><!-- shop-item-button -->
+             <!--      <a href="" class="quick-view-button" data-toggle="modal" data-target="#modal"><i class="icon ion-ios-plus-outline"></i></a> -->
+                </figcaption><!-- overlay-block -->
+              </figure>
+              <div class="card-block pd-15 tx-center">
+                <h6 class="tx-size-xs mg-b-5"><a href="" class="tx-inverse">待添加</a></h6>
+                <p class="tx-size-12 tx-danger mg-b-5">￥暂无</p>
+                <p class="tx-yellow mg-b-0">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </p>
+              </div><!-- card-block -->
+            </div><!-- card -->
+
+          </div><!-- card-deck -->
+
+
+
+          <nav aria-label="Page navigation" class="mg-t-80 mg-b-40 d-flex justify-content-center">
+            <ul class="pagination pagination-rounded pagination-inverse mg-b-0">
+
+              <li v-if="page_number <2" class="page-item disabled">
+                <a v-on:click="page_number = page_number-1" class="page-link" href="#" aria-label="Previous"><i class="fa fa-angle-left"></i></a>
+              </li>
+              <li v-else class="page-item">
+                <a v-on:click="page_number = page_number-1" class="page-link" href="#" aria-label="Previous"><i class="fa fa-angle-left"></i></a>
+              </li>
+
+              <div v-for="i in pages">
+              <li v-if="i == page_number" class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+              <li v-else  class="page-item"><a class="page-link" v-on:click="page_number = i" href="#">{{i}}</a></li>
+              <!-- <li class="page-item active"><a class="page-link" href="#">{{v-for循环}</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+              <li class="page-item"><a class="page-link" href="#">10</a></li> -->
+              </div>
+              <li class="page-item">
+                <a v-on:click="page_number = page_number+1" class="page-link" aria-label="Next"><i class="fa fa-angle-right"></i></a>
+              </li>
+            </ul>
+          </nav>
+        </div><!-- col-9 -->
+
+
+
+        <div class="col-lg-3 mg-t-40 mg-lg-t-0">
+          <div class="input-group">
+            <input v-model="toFindBook" type="search" class="form-control tx-size-12 bd-r-0 bd-color-gray-lighter" placeholder="搜索图书">
+            <span class="input-group-btn bd bd-l-0 bd-color-gray-lighter rounded-right">
+              <a v-on:click="findBookByName(1)" href="#"class="btn bg-white pd-x-15 tx-gray lh-1"><i class="fa fa-search"></i></a>
+            </span><!-- input-group-btn -->
+          </div><!-- input-group -->
+
+          <div class="card bg-transparent bd-0 mg-t-25">
+            <div class="card-header bg-transparent pd-x-0 bd-color-gray-lighter">
+              <span class="tx-uppercase tx-bold tx-size-14 tx-inverse">书籍种类</span>
+            </div><!-- card-header -->
+            <ul class="list-unstyled link-list lh-10 tx-size-14 mg-t-10">
+              <li class="tx-medium"><a href="#" v-on:click="showAll(1)"><i class="fa fa-angle-right mg-r-5"></i> 技能 &amp; 培训</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'人文科学')"><i class="fa fa-angle-right mg-r-5"></i> 人文科学</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'战术研究')"><i class="fa fa-angle-right mg-r-5"></i> 战术研究</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'小说和散文')"><i class="fa fa-angle-right mg-r-5"></i> 小说 &amp; 散文</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'运动和体育')"><i class="fa fa-angle-right mg-r-5"></i> 运动 &amp; 体育</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'教辅教材')"><i class="fa fa-angle-right mg-r-5"></i> 教辅教材</a></li>
+              <li class="tx-medium"><a href="#" v-on:click="findBookByCategory(1,'商贸和财经')"><i class="fa fa-angle-right mg-r-5"></i> 商贸 &amp; 财经</a></li>
+              
+            </ul>
+            <!-- 更多种类 -->
+            <!-- <div class="card-footer bg-transparent bd-color-gray-lighter pd-x-0">
+              <a href="" class="tx-uppercase tx-size-11 tx-semibold"><i class="fa fa-angle-down mg-r-5"></i> Show all Categories</a>
+            </div> --><!-- card-footer -->
+          </div><!-- card -->
+
+          <!-- <div class="card bd-0 bg-transparent mg-t-20">
+            <div class="card-header pd-x-0 bg-transparent bd-color-gray-lighter">
+              <span class="tx-size-14 tx-bold tx-uppercase tx-inverse">编辑推荐</span>
+            </div>
+            <div class="media-list mg-t-10">
+
+              <div class="media pd-y-10">
+                <img src="http://via.placeholder.com/1276x1920" class="img-fluid wd-48 mg-r-15" alt="Images">
+                <div class="media-body tx-size-xs">
+                  <a href="" class="tx-inverse tx-medium">白给的艺术</a>
+                  <p class="tx-yellow mg-b-5 d-block">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span class="tx-gray-light tx-size-11 mg-l-5">{{库存量}</span>
+                  </p>
+                  <p>$34.99</p>
+                </div>
+              </div>
+
+              <div class="media pd-y-10">
+                <img src="http://via.placeholder.com/1276x1920" class="img-fluid wd-48 mg-r-15" alt="Images">
+                <div class="media-body tx-size-xs">
+                  <a href="" class="tx-inverse tx-medium">Women Railing Shirt</a>
+                  <p class="tx-yellow mg-b-5 d-block">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span class="tx-gray-light tx-size-11 mg-l-5">233 reviews</span>
+                  </p>
+                  <p>$34.99</p>
+                </div>
+              </div>
+
+
+            </div>
+          </div> -->
+
+          <div class="card bd-0 rounded-0 bd bd-2 mg-t-20">
+            <div class="pd-x-20 pd-y-30 tx-center">
+              <h6 class="tx-pink tx-normal">限时特惠</h6>
+              <h3 class="tx-info  mg-b-10">最高优惠:九折!</h3>
+              <p class="tx-size-xs tx-gray lh-7">为庆祝本店开张,全场开启优惠,只要添加我们客服公众号,就有机会获得最高九折的优惠,机会有限,先到先得</p>
+              <p class="tx-gray-dark">公众号: <span class="tx-medium tx-info">hmtv_qz</span></p>
+              <p class="tx-size-xs tx-gray-light mg-b-0 lh-7">
+                截止时间 2019年 6月 15日<br>
+                本公司对该活动有一切解释权.
+              </p>
+            </div><!-- pd-30 -->
+          </div><!-- card -->
+        </div><!-- col-3 -->
+      </div><!-- row -->
+
+    </div><!-- container -->
+
+    <div class="container-wrapper bg-gray-lighter pd-y-40">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <div class="mg-b-20 mg-lg-b-0">
+          <h4 class="tx-inverse">已购买?</h4>
+          <p class="mg-b-0 tx-size-sm">点击右处按钮,查看订单.</p>
+        </div>
+        <a href="../templates/shop.html" class="btn btn-inverse tx-uppercase tx-size-11 tx-medium tx-spacing-2 pd-y-15">查看订单 <i class="fa fa-angle-right mg-l-5"></i></a>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+
+    <div class="container-wrapper bg-gray-darker pd-y-40">
+      <div class="container tx-center">
+        <span class="tx-size-xs">&copy; 2019 网上书城项目.</span>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+  </div><!-- bb-mainpanel -->
+
+  <div id="modal" class="modal fade">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content bd-0">
+        <div class="modal-body pd-20">
+          <div class="pos-absolute-right z-index-50">
+            <a href="#" class="close pd-t-15 pd-r-20 tx-normal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </a>
+          </div><!-- pos-absolute-right -->
+
+          <div v-if="selected_book == null" class="row no-gutters">
+            <div class="col-lg-5 tx-center">
+              <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt="">
+            </div><!-- col-5 -->
+            <div class="col-lg-7 mg-t-20 mg-lg-t-0 pd-lg-l-25-force d-flex align-items-start flex-column">
+              <a href="" class="tx-size-xs tx-gray-light">BookStore</a>
+              <h4 class="tx-inverse mg-b-15">未连接</h4>
+              <h5 class="tx-danger"><s class="tx-gray-light tx-normal">$00</s> $00</h5>
+              <p>
+                <a href="" class="tx-yellow">
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                </a>
+<!--                 <a href="" class="tx-size-xs mg-l-5">3 Reviews</a> -->
+              </p>
+              <p class="tx-size-sm tx-uppercase tx-success tx-semibold ">未连接</p>
+              <p class="tx-size-xs mg-b-20">未连接 <a href="">See more</a></p>
+
+              <!-- <h6 class="tx-size-xs tx-uppercase tx-semibold mg-b-10">Select Size</h6>
+              <p class="elem-size-selection mg-b-10">
+                <a href="" class="elem-size-selection-link">XS</a>
+                <a href="" class="elem-size-selection-link">M</a>
+                <a href="" class="elem-size-selection-link">L</a>
+                <a href="" class="elem-size-selection-link">XL</a>
+              </p> -->
+              <!-- <p class="tx-size-xs mg-b-20 mg-lg-b-auto">No idea? See <a href="">Size Details</a></p> -->
+              <p class="mg-b-5">
+                <a href="#" class="btn btn-danger tx-uppercase tx-size-xs tx-medium">无法连接</a>
+                <!-- <a href="" class="btn btn-inverse tx-uppercase tx-size-xs tx-medium">Add to Wishlist</a> -->
+              </p>
+            </div><!-- col-7 -->
+          </div><!-- row -->
+
+          <div v-else class="row no-gutters">
+            <div class="col-lg-5 tx-center">
+              <!-- <img src="http://via.placeholder.com/1276x1920" class="img-fluid" alt=""> -->
+              <img v-bind:src="'../../file/image/book/' + selected_book.ISBN + '/' + '1.png' " class="img-fluid" onerror="this.src='http://via.placeholder.com/1276x1920'" style="height: 477px;">
+            </div><!-- col-5 -->
+            <div class="col-lg-7 mg-t-20 mg-lg-t-0 pd-lg-l-25-force d-flex align-items-start flex-column">
+              <a href="#" class="tx-size-xs tx-gray-light">ISBN:{{selected_book.ISBN}}</a>
+              <h4 class="tx-inverse mg-b-15">书名:{{selected_book.bName}}</h4>
+              <h5 class="tx-danger"> ￥ {{selected_book.price}}</h5>
+              <p>
+                <a href="#" class="tx-yellow">
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                  <i class="icon ion-star"></i>
+                </a>
+                <a href="#" class="tx-size-xs mg-l-5">{{selected_book.number}} 库存量</a>
+              </p>
+              <p class="tx-size-sm tx-uppercase tx-primary tx-semibold ">{{selected_book.category}}</p>
+              <h6 class="tx-size-xs tx-uppercase tx-semibold mg-b-10">{{selected_book.author}}</h6>
+              <p class="tx-size-xs mg-b-20">{{selected_book.description}} <!-- <a href="">See more</a> --></p>
+
+              <!-- <h6 class="tx-size-xs tx-uppercase tx-semibold mg-b-10">{{selected_book.author}}</h6> -->
+              <!-- <p class="elem-size-selection mg-b-10">
+                <a href="" class="elem-size-selection-link">XS</a>
+                <a href="" class="elem-size-selection-link">M</a>
+                <a href="" class="elem-size-selection-link">L</a>
+                <a href="" class="elem-size-selection-link">XL</a>
+              </p> -->
+              <!-- <p class="tx-size-xs mg-b-20 mg-lg-b-auto">No idea? See <a href="">Size Details</a></p> -->
+              <p class="mg-b-5">
+                <a href="#" v-on:click="addCart(selected_book.ISBN)" class="btn btn-primary tx-uppercase tx-size-xs tx-medium">添加至购物车</a>
+                <!-- <a href="" class="btn btn-inverse tx-uppercase tx-size-xs tx-medium">Add to Wishlist</a> -->
+              </p>
+            </div><!-- col-7 -->
+          </div><!-- row -->
+
+        </div><!-- modal-body -->
+      </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+  </div><!-- modal -->
+</div>
+
+<script>
+  var vm = new Vue({
+
+    el:"#app",
+    data(){
+      return{
+        isLogin_user:false,
+        showType:"showAll",
+        page_number:1,
+        pages:1,
+        toFindBook:"",
+        toFindCategory:"",
+        topBooks:{
+          bName:"",
+          ISBN:"",
+          author:"",
+          price:"",
+          category:"",
+          number:"",
+          description:"",
+          imgUrl:"",
+        },
+        selected_book:{
+          bName:"",
+          ISBN:"",
+          author:"",
+          price:"",
+          category:"",
+          number:"",
+          description:"",
+          imgUrl:"",
+        },
+        buttonBooks:{
+          bName:"",
+          ISBN:"",
+          author:"",
+          price:"",
+          category:"",
+          number:"",
+          description:"",
+          imgUrl:"",
+        }
+
+      }
+    },
+    created:async function(){
+      await this.showAll(1);
+      await this.isLogin();
+      // await this.findBookByName(1);
+    },
+    methods:{
+      
+        showAll: async function(page_number){
+          this.showType = "showAll";
+          await this.$http.post('/Servlet/ShopShowServlet', {
+                  type:"showAll",
+                  start:(8*(page_number-1)),
+                  num:8,
+                }, {emulateJSON: true}).then(function (res){
+
+                    this.topBooks = res.body.splice(0,4);
+                    this.buttonBooks = res.body.splice(0,4);
+                    // this.$set(this,"topBooks",res.body.splice(0,4));
+                    // this.$set(this,"buttonBooks",res.body.splice(0,4));
+                    // console.log((8*(page_number-1)));
+                    // console.log((4+8*(page_number-1)));
+                    // console.log(this.topBooks);
+                    // console.log(this.buttonBooks);
+                }, function (res) {
+                    console.log(res.status);
+                });
+
+
+          await this.$http.post('/Servlet/ShopElemGetServlet', {
+                  elem:"findAllLength",
+                }, {emulateJSON: true}).then(function (res){
+                  // this.pages = parseInt(res.body/8) + 1;
+                  // console.log(this.pages);
+                  this.$set(this,"pages",parseInt(res.body/8) + 1);
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+
+        findBookByName: async function(page_number){
+          this.showType = "findBookByName";
+          await this.$http.post('/Servlet/ShopShowServlet', {
+                  type:"findBookByName",
+                  bookName:this.toFindBook,
+                  start:(8*(page_number-1)),
+                  num:8,
+                }, {emulateJSON: true}).then(function (res){
+                    // this.topBooks = res.body.splice(0,4);
+                    // this.buttonBooks = res.body.splice(0,4);
+                    this.$set(this,"topBooks",res.body.splice(0,4));
+                    this.$set(this,"buttonBooks",res.body.splice(0,4));
+                }, function (res) {
+                    console.log(res.status);
+                });
+
+
+          await this.$http.post('/Servlet/ShopElemGetServlet', {
+                  elem:"findBookLength",
+                  bookName:this.toFindBook,
+                }, {emulateJSON: true}).then(function (res){
+                  // this.pages = parseInt(res.body/8) + 1;
+                  // console.log(this.pages);
+                  this.$set(this,"pages",parseInt(res.body/8) + 1);
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+
+
+        findBookByCategory: async function(page_number,selected_category){
+          this.showType = "findBookByCategory";
+          this.toFindCategory = selected_category;
+          console.log(this.toFindCategory);
+          await this.$http.post('/Servlet/ShopShowServlet', {
+                  type:"findBookByCategory",
+                  category:this.toFindCategory,
+                  start:(8*(page_number-1)),
+                  num:8,
+                }, {emulateJSON: true}).then(function (res){
+                    // this.topBooks = res.body.splice(0,4);
+                    // this.buttonBooks = res.body.splice(0,4);
+                    this.$set(this,"topBooks",res.body.splice(0,4));
+                    this.$set(this,"buttonBooks",res.body.splice(0,4));
+                }, function (res) {
+                    console.log(res.status);
+                });
+
+
+          await this.$http.post('/Servlet/ShopElemGetServlet', {
+                  elem:"findCategoryLength",
+                  bookCategory:this.toFindCategory,
+                }, {emulateJSON: true}).then(function (res){
+                  // this.pages = parseInt(res.body/8) + 1;
+                  this.$set(this,"pages",parseInt(res.body/8) + 1);
+                }, function (res) {
+                    console.log(res.status);
+                });
+
+        },
+
+        isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  console.log(res.body)
+                  if(res.body[0].isLogin != null){
+                    if((String(res.body[0].isLogin)).indexOf("true") != -1){
+                      this.isLogin_user = true;
+                    }else{
+                      this.isLogin_user = false;
+                    }
+                  }else{
+                    this.isLogin_user = false;
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+
+        addCart: async function(toAddISBN){
+              await this.$http.post('/Servlet/CartManagerServlet', {
+                  type:"addElem",
+                  ISBN:toAddISBN,
+                }, {emulateJSON: true}).then(function (res){
+                  console.log(res.body)
+                  alert("添加成功！");       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+    },
+    watch:{
+        page_number:async function(val) {
+          if(!(val < 1 || val > this.pages)){
+            this.page_number = val;
+            console.log(this.page_number);
+            if(this.showType.indexOf("showAll") != -1){
+                await this.showAll(this.page_number);
+            }else if(this.showType.indexOf("findBookByName") != -1){
+                await this.$http.post('/Servlet/ShopShowServlet', {
+                    type:"findBookByName",
+                    bookName:this.toFindBook,
+                    start:(8*(page_number-1)),
+                    num:8,
+                  }, {emulateJSON: true}).then(function (res){
+                      this.topBooks = res.body.splice(0,4);
+                      this.buttonBooks = res.body.splice(0,4);
+                      console.log(this.pages);
+                      // this.$set(this,"topBooks",res.body.splice(0,4));
+                      // this.$set(this,"buttonBooks",res.body.splice(0,4));
+                  }, function (res) {
+                      console.log(res.status);
+                  });
+            }else if(this.showType.indexOf("findBookByCategory") != -1){
+                await this.$http.post('/Servlet/ShopShowServlet', {
+                  type:"findBookByCategory",
+                  bookCategory:this.toFindCategory,
+                  start:(8*(page_number-1)),
+                  num:8,
+                }, {emulateJSON: true}).then(function (res){
+                    this.topBooks = res.body.splice(0,4);
+                    this.buttonBooks = res.body.splice(0,4);
+                    console.log(this.pages);
+                    // this.$set(this,"topBooks",res.body.splice(0,4));
+                    // this.$set(this,"buttonBooks",res.body.splice(0,4));
+                }, function (res) {
+                    console.log(res.status);
+                });
+            }
+          }
+          this.$forceUpdate();
+        },
+
+
+
+    }
+  })
+</script>
+  
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../js/blockbox.js"></script>
+  <script src="../lib/select2/js/select2.min.js"></script>
+</body>
+</html>

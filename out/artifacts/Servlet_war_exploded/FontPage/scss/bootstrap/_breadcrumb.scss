@@ -1,0 +1,52 @@
+/*! ########## 3.2 Breadcrumbs ########## */
+
+.breadcrumb-item {
+  + .breadcrumb-item::before {
+    font-family: $font-family-roboto;
+  }
+}
+
+.breadcrumb-white {
+  .breadcrumb-item {
+    color: #fff;
+    opacity: .5;
+
+    + .breadcrumb-item::before { color: #fff; }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    &.active {
+      color: #fff;
+      opacity: 1;
+
+      &::before { opacity: .5; }
+    }
+  }
+}
+
+.breadcrumb-gray-dark {
+  .breadcrumb-item { color: $gray-dark; }
+}
+
+.breadcrumb-gray {
+  .breadcrumb-item {
+    color: $gray;
+    &:hover,
+    &:focus { color: $gray-dark; }
+  }
+}
+
+.breadcrumb-gray-light {
+  .breadcrumb-item {
+    color: $gray-light;
+    &:hover,
+    &:focus { color: $gray-dark; }
+
+    &.active {
+      color: $gray;
+    }
+  }
+}

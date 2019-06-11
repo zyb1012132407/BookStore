@@ -1,0 +1,34 @@
+/*! ########## 3.10 Icons ########## */
+
+.iconwrap {
+  display: inline-block;
+  line-height: 0;
+  border: 1px solid transparent;
+  text-align: center;
+
+  .fa,
+  .icon {
+    display: inline-block;
+    position: relative;
+    top: -.5px;
+  }
+
+  // iconwrap-size($padding, $icon-size);
+  &.icon-16 { @include iconwrap-size(6px, 16px); }
+  &.icon-18 { @include iconwrap-size(8px, 18px); }
+  &.icon-20 { @include iconwrap-size(8px, 20px); }
+  &.icon-24 { @include iconwrap-size(10px, 24px); }
+  &.icon-28 { @include iconwrap-size(10px, 28px); }
+  &.icon-32 { @include iconwrap-size(12px, 32px); }
+  &.icon-36 { @include iconwrap-size(12px, 36px); }
+  &.icon-40 { @include iconwrap-size(14px, 40px); }
+  &.icon-44 { @include iconwrap-size(14px, 44px); }
+  &.icon-48 { @include iconwrap-size(16px, 48px); }
+}
+
+.icon {
+  &.tx-size-64 {
+    line-height: 0;
+    &::before { line-height: 45px; }
+  }
+}

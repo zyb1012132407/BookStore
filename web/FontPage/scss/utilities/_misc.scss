@@ -1,0 +1,98 @@
+/*! ########## 4.10 Miscellaneous ########## */
+.shadow-base {
+  -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+}
+
+.shadow-1 {
+  -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,0.07);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+}
+
+.shadow-none {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.transition { @include transition($transition-base); }
+
+.object-position-left { object-position: left; }
+.object-fit-cover { object-fit: cover; }
+.no-object-fit .object-fit-cover { visibility: hidden; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-crosshair { cursor: crosshair; }
+
+.ft-l { float: left !important; }
+.ft-r { float: right !important; }
+.ft-none { float: none !important; }
+
+.placeholder-light {
+  /* WebKit, Blink, Edge */
+  &::-webkit-input-placeholder {
+  	opacity: 0.1;
+  	color: #fff;
+  }
+
+  /* Mozilla Firefox 19+ */
+  &::-moz-placeholder {
+  	opacity: 0.1;
+  	color: #fff;
+  }
+
+  /* Internet Explorer 10-11 */
+  &:-ms-input-placeholder {
+  	opacity: 0.1;
+  	color: #fff;
+  }
+}
+
+.placeholder-dark {
+  /* WebKit, Blink, Edge */
+  &::-webkit-input-placeholder {
+  	opacity: 0.1;
+  	color: #000 !important;
+  }
+
+  /* Mozilla Firefox 19+ */
+  &::-moz-placeholder {
+  	opacity: 0.1;
+  	color: #000 !important;
+  }
+
+  /* Internet Explorer 10-11 */
+  &:-ms-input-placeholder {
+  	opacity: 0.1;
+  	color: #000 !important;
+  }
+}
+
+@mixin do-display($viewport) {
+  .d-#{$viewport}-block { display: block; }
+  .d-#{$viewport}-inline { display: inline; }
+  .d-#{$viewport}-inline-block { display: inline-block; }
+  .d-#{$viewport}-none { display: none; }
+  .d-#{$viewport}-flex { display: flex; }
+  .d-#{$viewport}-table { display: table; }
+
+  .d-#{$viewport}-block-force { display: block !important; }
+  .d-#{$viewport}-inline-force { display: inline !important; }
+  .d-#{$viewport}-inline-block-force { display: inline-block !important; }
+  .d-#{$viewport}-none-force { display: none !important; }
+  .d-#{$viewport}-flex-force { display: flex !important; }
+  .d-#{$viewport}-table-force { display: table !important; }
+}
+
+@media (min-width: 480px) { @include do-display("xs"); }
+@include media-breakpoint-up(sm) { @include do-display("sm"); }
+@include media-breakpoint-up(md) { @include do-display("md"); }
+@include media-breakpoint-up(lg) { @include do-display("lg"); }
+@include media-breakpoint-up(xl) { @include do-display("xl"); }
+
+@media (max-width: 479px) {
+  .hidden-xss-down { display: none; }
+}
+
+@media (min-width: 480px) {
+  .hidden-xss-up { display: none; }
+}

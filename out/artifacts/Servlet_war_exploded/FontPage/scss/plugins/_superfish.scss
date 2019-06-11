@@ -1,0 +1,173 @@
+/*! ########## 6.7 SuperFish ########## */
+
+.sf-menu {
+  float: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+
+  li {
+    background-color: transparent;
+
+    &:hover,
+    &.sfHover { background-color: transparent; }
+  }
+
+  a {
+    color: $gray;
+    border: 0;
+  }
+
+  > li {
+    float: none;
+
+    > a {
+      padding: 25px 20px;
+    }
+  }
+
+  ul {
+    background-color: #fff;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.05);
+    border: 1px solid rgba(#000, .1);
+    text-transform: none;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: normal;
+    min-width: 180px;
+
+    ul { top: -1px; }
+
+    li,
+    ul li {
+      background-color: transparent;
+
+      a {
+        padding-left: 20px;
+        padding-right: 20px;
+
+        &:hover,
+        &:focus {
+          background-color: lighten($gray-lightest, 2%);
+          color: $gray-dark;
+        }
+      }
+    }
+  }
+}
+
+.sf-arrows {
+  .sf-with-ul {
+    padding-right: 25px;
+
+    &::after {
+      content: '\f107 ';
+      font-family: 'FontAwesome';
+      font-weight: normal;
+      border: 0;
+      margin-top: -9px;
+      padding-right: 8px;
+      opacity: .75;
+    }
+  }
+
+  ul .sf-with-ul {
+    &::after {
+      margin-top: -11px;
+      padding-right: 15px;
+    }
+  }
+}
+
+// dark scheme
+.sf-menu-dark {
+  a { color: $gray-light; }
+
+  ul {
+    background-color: $brand-inverse;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 0;
+
+    ul { top: 0; }
+
+    li,
+    ul li {
+      a {
+        color: $gray-light;
+
+        &:hover,
+        &:focus {
+          background-color: darken($brand-inverse, 3%);
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// responsive
+@include media-breakpoint-down(md) {
+  .sf-menu {
+    flex-direction: column;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+
+    > li {
+      > a {
+        padding: 12px 20px;
+        &:hover,
+        &:focus {
+          background-color: $gray-lightest;
+        }
+      }
+    }
+
+    ul {
+      position: static;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: #f7f7f7;
+      border-left-width: 0;
+      border-right-width: 0;
+    }
+  }
+
+  .sf-arrows {
+    .sf-with-ul {
+      &::after { padding-right: 12px; }
+    }
+  }
+
+  .sf-menu-dark {
+    background-color: $brand-inverse;
+
+    > li {
+      > a {
+        padding: 12px 20px;
+
+        &:hover,
+        &:focus {
+          background-color: darken($gray-dark, 3%);
+        }
+      }
+    }
+
+    ul {
+      background-color: darken($gray-dark, 3%);
+
+      li,
+      ul li {
+        a {
+          &:hover,
+          &:focus {
+            background-color: darken($brand-inverse, 5%);
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

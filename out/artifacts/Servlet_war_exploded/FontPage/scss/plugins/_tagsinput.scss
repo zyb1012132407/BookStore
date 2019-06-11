@@ -1,0 +1,25 @@
+/*! ########## 6.4 TagsInput ########## */
+
+.bootstrap-tagsinput {
+  border-color: $input-border-color;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0 6px 6px;
+  @include border-radius();
+
+  .label-info {
+    background-color: $brand-info;
+    color: #fff;
+    font-size: $font-size-sm;
+    padding: 2px 8px;
+    margin-top: 6px;
+    display: inline-block;
+    @include border-radius(2px);
+  }
+
+  .tag [data-role="remove"]::after {
+    content: '\f2d7';
+    font-family: 'Ionicons';
+    font-size: 11px;
+  }
+}

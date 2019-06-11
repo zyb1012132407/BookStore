@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta property="og:url" content="http://themetrace.com/blockbox/templates" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blockbox Responsive Multi-Purpose HTML5 Template" />
+  <meta property="og:description" content="Truly a multi-purpose and responsive html5 template that covers almost all types of UI from landing, dashboard, admin, e-commerce, apps and more. See it for yourself." />
+  <meta property="og:image" content="http://www.themetrace.com/blockbox/images/cover.jpg" />
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>公告栏</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/select2/css/select2.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+  </style>
+</head>
+
+<body class="pd-t-70">
+<div id="app" v-cloak>
+  <div class="bb-headpanel bg-white ht-70 d-flex align-items-center shadow-1">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+
+      <!-- menu button display for mobile only -->
+      <a id="showBbMenu" class="hidden-lg-up tx-inverse lh-0" href=""><i class="fa fa-navicon tx-size-18"></i></a>
+
+      <div class="menu-right d-lg-flex align-items-center tx-size-14 hidden-md-down">
+
+        <!-- logo for mobile display only -->
+        <div class="ht-70 shadow-1 pos-absolute-top d-flex align-items-center pd-x-25 hidden-lg-up">
+          <a href="index.html" class="tx-inverse tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-gray-light tx-size-22"></i> BookStore</a>
+        </div>
+
+        <nav class="nav nav-gray nav-active-primary align-items-start align-items-lg-center flex-column flex-lg-row tx-size-12 tx-uppercase tx-medium tx-spacing-1 mg-r-20">
+          <a href="index.html" class="nav-link">主页</a>
+          <a href="notice-board.html" class="nav-link active">公告</a>
+          <a href="shop-pages.html" class="nav-link">商店</a>
+<!--           <a href="../templates/portfolio.html" class="nav-link">Portfolio</a>
+          <a href="../templates/shop.html" class="nav-link">Shop</a>
+          <a href="../templates/pages.html" class="nav-link">Pages</a>
+          <a href="../templates/blocks.html" class="nav-link">Blocks</a>
+          <a href="../templates/components.html" class="nav-link">Components</a> -->
+        </nav>
+
+        <a href="cart.html" class="btn btn-pink rounded-2 mg-t-20 mg-lg-t-0 mg-lg-r-10 pd-x-15 bd-0">
+          <span class="tx-uppercase tx-size-11 tx-spacing-2 mg-r-10 hidden-lg-down">购物车</span>
+          <i class="icon ion-bag"></i>
+        </a>
+        <div class="d-flex bd btn align-items-center justify-content-center mg-t-10 mg-lg-t-0 pd-x-15 rounded-2">
+          <span v-if="isLogin" class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a href="dashboard-userIndex.html">个人中心</a></span>
+          <span v-else class="tx-size-11 tx-uppercase tx-spacing-2 hidden-lg-down"><a href="sign-in.html">登录</a></span>
+        </div>
+      </div>
+    </div><!-- container -->
+  </div><!-- headpanel -->
+
+  <div class="bb-mainpanel">
+
+    <div class="container-wrapper pd-y-40 pd-lg-y-60">
+      <div class="container">
+        <div class="d-sm-flex justify-content-between align-items-center">
+          <div>
+            <h3 class="tx-inverse tx-size-40 tx-bold mg-b-5">公告</h3>
+            <p class="mg-b-0">我们的书,多到超出你的想象.</p>
+          </div>
+          <a href="notice-board.html" class="btn btn-gray-light bd-0s tx-uppercase tx-size-11 tx-spacing-2 pd-y-15 mg-t-20 mg-sm-t-0">查看公告，以获取我们最新的动向 <i class="fa fa-angle-right mg-l-5"></i></a>
+        </div><!-- d-flex -->
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container pd-b-60 tx-size-sm">
+      <div class="row row-lg flex-row-reverse">
+        <div v-for="notice in notices" class="col-lg-12">
+
+          <div class="card-deck card-deck-sm mg-t-40">
+		    <div class="d-flex justify-content-between">
+		      <div class="media">
+		        <img src="http://via.placeholder.com/300x300" class="wd-36 rounded-circle mg-r-15 mg-t-5" alt="">
+		        <div class="media-body bg-info-light pd-20 ">
+		          <div class="d-sm-flex justify-content-between align-items-center mg-b-15  wd-200 wd-lg-1000 wd-sm-600">
+		            <div class="tx-bold tx-inverse tx-size-20">{{notice.title}}</div>
+		            <div class="tx-size-20">{{notice.date}}</div>
+		          </div>
+		          <p class="tx-size-14 mg-b-10">{{notice.content}}</p>
+		        </div><!-- media-body -->
+		      </div><!-- media -->
+		    </div><!-- d-flex -->
+          </div><!-- card-deck -->
+
+        </div>
+      </div><!-- row -->
+    </div><!-- container -->
+
+    <div class="container-wrapper bg-gray-darker pd-y-40">
+      <div class="container tx-center">
+        <span class="tx-size-xs">&copy; 2019 网上书城项目.</span>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+  </div><!-- bb-mainpanel -->
+</div>
+
+    <script>
+      var vm = new Vue({
+        el:"#app",
+        data(){
+          return {
+            isLogin_user:false,
+            notices:null,
+          }
+        },
+        created:async function(){
+          await this.isLogin();
+          await this.showAll();
+        },
+        methods:{
+          	isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  console.log(res.body)
+                  if(res.body[0].isLogin != null){
+                    if((String(res.body[0].isLogin)).indexOf("true") != -1){
+                      this.isLogin_user = true;
+                    }else{
+                      this.isLogin_user = false;
+                    }
+                  }else{
+                    this.isLogin_user = false;
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+            showAll:async function(){
+            	await this.$http.post('/Servlet/NoticeManagerServlet', {
+                  type:"showAll",
+                }, {emulateJSON: true}).then(function (res){
+                  this.notices = res.body;
+                  console.log(this.notices);
+                }, function (res) {
+                    console.log(res.status);
+                });
+            }
+        },
+
+      })
+    </script>
+
+
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../js/blockbox.js"></script>
+  <script src="../lib/select2/js/select2.min.js"></script>
+</body>
+</html>

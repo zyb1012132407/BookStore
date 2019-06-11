@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>【管理】书籍管理</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/morris.js/morris.css" rel="stylesheet">
+  <link href="../lib/air-datepicker/datepicker.min.css" rel="stylesheet">
+  <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <link href="../css/line-awesome.min.css" rel="stylesheet">
+  <link href="../css/blockbox-templates.css" rel="stylesheet">
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../lib/raphael/raphael.min.js"></script>
+  <script src="../lib/moment/moment.js"></script>
+  <script src="../lib/chart.js/Chart.js"></script>
+  <script src="../lib/morris.js/morris.js"></script>
+  <script src="../lib/peity/jquery.peity.js"></script>
+  <script src="../lib/air-datepicker/datepicker.min.js"></script>
+  <script src="../lib/air-datepicker/datepicker.en.js"></script>
+  <script src="../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+
+  <script src="../js/blockbox.js"></script>
+  <script src="../js/blockbox.dashboard.js"></script>
+
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+    .modal-backdrop{z-index:0;}
+  </style>
+</head>
+
+<body class="dashboard-2 bg-gray-lighter tx-size-13">
+<div id="app" v-cloak>
+  <div class="headpanel pos-fixed-top bg-gray-dark ht-70 pd-lg-l-240 z-index-100 d-flex align-items-center justify-content-between">
+    <div class="headpanel-logo pos-absolute t-0 l-neg-240 l-lg-0 bg-gray-darker ht-70 wd-240 d-flex align-items-center pd-x-20">
+      <a href="index.html" class="tx-size-24 tx-medium tx-spacing-neg-4 tx-white">
+        <i class="fa fa-cube"></i> BookStore <span class="tx-light tx-info-light">dash</span>
+      </a>
+    </div><!-- headpanel-logo -->
+    <div class="pd-x-20 d-flex align-items-center">
+    </div>
+
+    <div class="pd-x-20">
+      <nav class="nav nav-inline align-items-center justify-content-end flex-row">
+        <a href="#" id="searchmenu" class="nav-link tx-white hidden-sm-up"><i class="fa fa-search"></i></a>
+        <a href="" class="nav-link tx-white pd-r-5 pos-relative mg-l-auto">
+          <i class="fa fa-envelope tx-size-16"></i>
+          <span class="pos-absolute t-10 r-0 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="nav-link tx-white mg-r-5 pos-relative">
+          <i class="fa fa-bell tx-size-16"></i>
+          <span class="pos-absolute t-10 r-10 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="tx-white nav-link tx-size-13 pd-r-5 pd-md-r-10"><img v-bind:src="'/Servlet/file/image/user/' + adminUser.username + '.png'" onerror="this.src='../image/user_default.png'" class="rounded-circle wd-32" alt=""></a>
+        <div class="dropdown">
+          <a href="" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{adminUser.username}} </span><i class="fa fa-angle-down mg-l-5"></i></a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-inverse bg-gray-darker tx-size-13 bd-0 mg-t-18 rounded-top-0 shadow-none">
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userInformationManage.html"><i class=""></i> 修改资料</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userIndex.html">查看个人主页</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html">账户设置</a>
+            <!-- <a class="dropdown-item" href="#">Privacy Settings</a> -->
+            <a class="dropdown-item" v-on:click="logout" href="#">登出</a>
+          </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+      </nav>
+    </div>
+  </div><!-- headpanel -->
+
+  <div class="leftpanel pos-fixed-left t-70 l-neg-240 l-lg-0 bg-info-light wd-240 pd-y-20">
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20">个人管理</h6>
+    <ul class="nav nav-gray-dark nav-stacked flex-column lh-10 wd-100p mg-t-10 tx-size-13">
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userIndex.html" class="nav-link"><i class="fa fa-external-link-square wd-16 tx-center mg-r-5"></i> 个人主页</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userInformationManage.html" class="nav-link"><i class="fa fa-mouse-pointer tx-center wd-16 mg-r-5"></i> 修改资料</a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="dashboard-userOrderManage.html" class="nav-link"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 账户设置</a>
+      </li>
+    </ul>
+  <div v-if="isAdmin">
+      <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">后台管理权限</h6>
+      <ul class="nav nav-gray-dark nav-stacked flex-column wd-100p mg-t-10 tx-size-13">
+        <li class="nav-item">
+          <a href="/Servlet/FontPage/pages/dashboard-NoticeManage-Admin.html" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 公告管理</a>
+        </li>
+        <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userManage-Admin.html" class="nav-link"><i class="fa fa-file-text tx-center wd-16 mg-r-5"></i> 用户管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link active"><i class="fa fa-navicon wd-16 tx-center mg-r-5"></i> 图书管理</a>
+      </li>
+        <li class="nav-item">
+          <a href="dashboard-OrderManage-Admin.html" class="nav-link"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+        </li>
+      </ul>
+  </div>
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">版本信息</h6>
+    <p class="pd-x-20 tx-gray tx-size-12">仅供测试版本.</p>
+  </div><!-- leftpanel -->
+
+  <div class="main pos-fixed t-70 r-0 b-0 l-0 l-lg-240">
+    <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+      <h5 class="tx-inverse tx-bold mg-b-0">书籍管理</h5>
+                     <button v-on:click="startAdd()"  class="btn btn-primary" data-toggle="modal" data-target="#modaldemo1">添加书籍</button>
+                                      
+      <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+        <a class="breadcrumb-item" href="#">控制台</a>
+        <span class="breadcrumb-item active">书籍管理</span>
+      </nav>
+    </div><!-- main-header -->
+    <div class="main-body pd-20">
+      <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card-group mg-t-20">
+            <div class="card bd-y-0 bd-l-0 rounded-2">
+              <div class="card-header bd-b-0 pd-x-20 pd-y-15 d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-size-11 tx-size-lg-12 tx-bold tx-spacing-1 mg-b-0">书籍总计</h6>
+              </div><!-- card-header -->
+              <div class="card-block pd-x-25 pd-b-25 pd-t-0 d-flex justify-content-between align-items-center">
+                <span class="peity-bar" data-peity='{ "fill": ["#1695f5"], "height": 40, "width": 60 }'>5,3,9,6,5,9,7,3,5,2</span>
+                <span class="tx-bold tx-inverse tx-arimo tx-size-28">{{bookNumber.bookOfAllNumber}}类</span>
+              </div><!-- card-block -->
+              
+            </div><!-- card -->
+            <div class="card bd-y-0 bd-l-0 rounded-0 mg-t-1 mg-sm-t-0">
+              <div class="card-header bd-b-0 pd-x-20 pd-y-15 d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-size-11 tx-size-lg-12 tx-bold tx-spacing-1 mg-b-0">库存正常书籍</h6>
+              </div><!-- card-header -->
+              <div class="card-block pd-x-25 pd-b-25 pd-t-0 d-flex justify-content-between align-items-center">
+                <span class="peity-bar" data-peity='{ "fill": ["#AC10ED"], "height": 40, "width": 60 }'>2,8,7,8,2,6,5,3,5,2</span>
+                <span class="tx-bold tx-inverse tx-arimo tx-size-28">{{bookNumber.bookOfAllNumber - bookNumber.bookOfLowNumber}}名</span>
+              </div><!-- card-block -->
+              
+            </div><!-- card -->
+            <div class="card bd-y-0 bd-l-0 rounded-2 mg-t-1 mg-md-t-0">
+              <div class="card-header bd-b-0 pd-x-20 pd-y-15 d-flex justify-content-between align-items-center">
+                <h6 class="card-title tx-uppercase tx-size-11 tx-size-lg-12 tx-bold tx-spacing-1 mg-b-0">库存不足书籍</h6>
+              </div><!-- card-header -->
+              <div class="card-block pd-x-20 pd-b-25 pd-t-0 d-flex justify-content-between align-items-center">
+                <span class="peity-bar" data-peity='{ "fill": ["#15e1d5"], "height": 40, "width": 60 }'>8,6,5,9,8,4,9,3,5,9</span>
+                <span class="tx-bold tx-inverse tx-arimo tx-size-28">{{bookNumber.bookOfLowNumber}}本</span>
+              </div><!-- card-block -->
+                
+            </div><!-- card -->
+          </div><!-- card-group -->
+
+          <div class="container pd-x-0 mg-t-20 bg-white">
+
+            <table class="table table-responsive d-xs-table table-hover">
+              <thead>
+                <tr>
+                  <th>书籍名</th>
+                  <th>ISBN</th>
+                  <th>作者</th>
+                  <th>价格</th>
+                  <th>分类</th>
+                  <th>库存</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody v-for="book in books">
+                  <tr>
+                    <th scope="row">{{book.bName}}</th>
+                    <td>{{book.ISBN}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.number}}</td>
+                    <td>
+                      <button v-on:click="startUpdate(book.ISBN)" class="btn btn-primary" data-toggle="modal" data-target="#modaldemo1">修改</button>
+                      <button v-on:click="toUploadISBN=book.ISBN" class="btn btn-success mg-l-10" data-toggle="modal" data-target="#modaldemo2">上传文件</button>
+                      <button v-on:click="deleteBook(book.ISBN)" class="btn btn-danger mg-l-10 mg-r-5">删除</button>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div><!-- container -->
+        </div><!-- col-12 -->
+      </div><!-- row -->
+    </div><!-- main-body -->
+  </div><!-- main -->
+
+  <div class="modal fade" id="modaldemo1" style="z-index:99999">
+    <div class="modal-dialog" style="top:90px;">
+      <div class="modal-content">
+            <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 v-if="addOrUpdate" class="modal-title">添加书籍</h4>
+          <h4 v-else class="modal-title">修改书籍</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            <!-- 模态框主体 -->
+        <div class="modal-body">
+          书籍名:<input v-model="newBook.bName" class="form-control" type="text" width="80%" placeholder="bookname"><br>
+          ISBN&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.ISBN" class="form-control" type="text" width="90%" placeholder="ISBN"><br>
+          作者&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.author" class="form-control" type="text" width="90%" placeholder="author"><br>
+          价格&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.price" class="form-control" type="text" width="90%" placeholder="price"><br>
+          类别&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.category" class="form-control" type="text" width="90%" placeholder="category"><br>
+          库存&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.number" class="form-control" type="text" width="90%" placeholder="number"><br>
+          描述&nbsp;&nbsp;&nbsp;&nbsp;:<input v-model="newBook.description" class="form-control" type="text" width="90%" placeholder="description"><br>
+          {{newBook.bName}}
+        </div>
+            <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <div v-if="addOrUpdate">
+            <button v-on:click="addBook(newBook)" type="button" class="btn btn-primary" data-dismiss="modal">添加</button>
+          </div>
+          <div v-else>
+            <button v-on:click="updateBook(newBook,toUpdateBookISBN)" type="button" class="btn btn-primary" data-dismiss="modal">修改</button>
+          </div>
+          
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modaldemo2" style="z-index:99999">
+    <div class="modal-dialog" style="top:90px;">
+      <div class="modal-content">
+            <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">上传图片</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            <!-- 模态框主体 -->
+        <div class="modal-body">
+          <form action="/Servlet/BookImageServlet" method="post" enctype="multipart/form-data">
+              <img class="mg-l-10" v-for="i in 4" v-if="toUploadISBN != null" v-bind:src="'../../file/image/book/' + toUploadISBN + '/' + i + '.png' " onerror="this.src='../image/user_default.png'" style="width: 100px;height: 150px;">
+              <input v-bind:name="toUploadISBN"  type="text" readonly style="display:none;" />
+                     <input class="btn btn-white" type="file" name="myfile">
+                     <input class="btn btn-white" type="file" name="myfile">
+                     <input class="btn btn-white" type="file" name="myfile">
+                     <input class="btn btn-white" type="file" name="myfile">
+                     <input id="submit_real_input" class="btn btn-white mx-auto" type="submit" value="确定上传" style="display:none;">
+
+          </form>
+        </div>
+            <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button id="submit_input" type="button" class="btn btn-primary" data-dismiss="modal">覆盖</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+  <script>
+
+    var vm = new Vue({
+      el:"#app",
+      data(){
+        return{
+          adminUser:{
+            username:"网络未连接",
+            password:"",
+            email:"",
+            sex:"",
+            age:null,
+            level:0,
+          },
+          bookNumber:{
+            bookOfAllNumber:0,
+            bookOfLowNumber:0,
+          },
+          books:null,
+          addOrUpdate:false,
+          toUpdateBookISBN:null,
+          toUploadISBN:null,
+          newBook:{
+            bName:null,
+            ISBN:null,
+            author:null,
+            price:null,
+            category:null,
+            number:null,
+            description:null,
+            imgUrl:"",
+          },
+          isAdmin:false,
+
+          
+        }
+      },
+      created:async function(){
+        await this.isLogin();
+        await this.showAll();
+      },
+      methods:{
+        test:function(){
+
+        },
+        startAdd:function(){
+          this.toUpdateBookISBN = null;
+          this.addOrUpdate = true;
+        },
+        startUpdate:async function(toUpdateBook){
+          this.toUpdateBookISBN = toUpdateBook;
+          await this.$http.post('/Servlet/BookManagerServlet', {
+                  type:"findBookByISBN",
+                  ISBN:toUpdateBook,
+                }, {emulateJSON: true}).then(function (res){
+                  console.log(res.body);
+                  this.newBook = res.body[0];
+                  console.log(this.newBook);
+                }, function (res) {
+                    console.log(res.status);
+                });
+          this.addOrUpdate = false;
+        },
+        showAll: async function () {
+                //发送 post 请求
+                await this.$http.post('/Servlet/BookManagerServlet', {
+                    type:"showAll",
+                }, {emulateJSON: true}).then(function (res){
+                  this.books = res.body;
+                  // this.$set(this,"users",res.body);
+                  // console.log(res.body);
+                  let bookOfLowNumber = 0;
+                  for(let i = 0;i < res.body.length;i++){
+                    if(res.body[i].number == 0){
+                      bookOfLowNumber++;
+                    }
+                  }
+                  this.bookNumber.bookOfAllNumber = res.body.length;
+                  this.bookNumber.bookOfLowNumber = bookOfLowNumber;
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+        deleteBook: async function (ISBN) {
+                //发送 post 请求
+                await this.$http.post('/Servlet/BookManagerServlet', {
+                    type:"deleteBook",
+                    deleteISBN:ISBN,
+                }, {emulateJSON: true}).then(function (res){
+                  this.books = res.body;    
+                  let bookOfLowNumber = 0;
+                  for(let i = 0;i < res.body.length;i++){
+                    if(res.body[i].number == 0){
+                      bookOfLowNumber++;
+                    }
+                  }
+                  this.bookNumber.bookOfAllNumber = res.body.length;
+                  this.bookNumber.bookOfLowNumber = bookOfLowNumber;
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+        addBook: async function (newBook) {
+                //发送 post 请求
+                await this.$http.post('/Servlet/BookManagerServlet', {
+                    type:"addBook",
+                    addBook:newBook,
+                }, {emulateJSON: true}).then(function (res){
+                  this.books = res.body;
+                  let bookOfLowNumber = 0;
+                  for(let i = 0;i < res.body.length;i++){
+                    if(res.body[i].number == 0){
+                      bookOfLowNumber++;
+                    }
+                  }
+                  this.bookNumber.bookOfAllNumber = res.body.length;
+                  this.bookNumber.bookOfLowNumber = bookOfLowNumber;
+                }, function (res) {
+                    console.log(res.status);
+                });
+                this.newBook = {
+                                    bName:null,
+                                    ISBN:null,
+                                    author:null,
+                                    price:null,
+                                    category:null,
+                                    number:null,
+                                    description:null,
+                                    imgUrl:"",
+                                  };
+        },
+        updateBook:async function(newBook,toUpdateBookISBN){
+          //发送 post 请求
+                await this.$http.post('/Servlet/BookManagerServlet', {
+                    type:"updateBook",
+                    addBook:newBook,
+                    toUpdateISBN:toUpdateBookISBN,
+                }, {emulateJSON: true}).then(function (res){
+                  this.books = res.body;
+                  let bookOfLowNumber = 0;
+                  for(let i = 0;i < res.body.length;i++){
+                    if(res.body[i].number == 0){
+                      bookOfLowNumber++;
+                    }
+                  }
+                  this.bookNumber.bookOfAllNumber = res.body.length;
+                  this.bookNumber.bookOfLowNumber = bookOfLowNumber;   
+                }, function (res) {
+                    console.log(res.status);
+                });
+                this.newBook = {
+                                    bName:null,
+                                    ISBN:null,
+                                    author:null,
+                                    price:null,
+                                    category:null,
+                                    number:null,
+                                    description:null,
+                                    imgUrl:"",
+                                  };
+        },
+        isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  if(res.body[0].isLogin != null){
+
+                    if(res.body[1].level > 0){
+                      this.isAdmin = true;
+                    }else{
+                      this.isAdmin = false;
+                      this.routeForUserWeb();
+                    }
+
+
+                    if((String(res.body[0].isLogin)).indexOf("true") == -1){
+                      this.routeForNewWeb();
+                    }else{
+                      this.adminUser = {
+                        username:res.body[1].username,
+                        password:res.body[1].password,
+                        email:res.body[1].email,
+                        sex:res.body[1].sex,
+                        age:res.body[1].age,
+                        level:res.body[1].level,
+                      }
+                    }
+                  }else{
+                    alert("您未登录，将直接跳转到登录页面");
+                    this.routeForNewWeb();
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+        routeForNewWeb:function(){
+          window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+        },
+        routeForUserWeb:function(){
+          window.location.href = '/Servlet/FontPage/pages/dashboard-userIndex.html'
+        },
+        logout: async function(){
+          await this.$http.post('/Servlet/UserManagerServlet', {
+                  type:"logout",
+                }, {emulateJSON: true}).then(function (res){
+                    window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+      }
+    })
+
+    $(function(){
+      'use strict';
+
+      $('.leftpanel, .main').perfectScrollbar();
+
+      $('#showLeft').on('click', function(){
+        if($('body').hasClass('show-left')) {
+          $('body').removeClass('show-left');
+        } else {
+          $('body').addClass('show-left');
+        }
+        return false;
+      });
+
+      $("#submit_input").click(function () {
+            $("#submit_real_input").click();
+      });
+
+    });
+  </script>
+
+</body>
+</html>

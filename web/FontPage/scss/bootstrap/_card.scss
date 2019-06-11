@@ -1,0 +1,171 @@
+/*! ########## 3.4 Cards ########## */
+
+.card-header,
+.card-footer {
+  border-color: $gray-lightest;
+}
+
+.card-title {
+  color: $brand-inverse;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.accordion {
+  .card {
+    @include border-radius(0);
+
+    + .card { border-top-width: 0; }
+    &:first-child{
+      &,
+      .card-header a { @include border-top-radius($border-radius); }
+    }
+    &:last-child {
+      &,
+      .card-header a.collapsed { @include  border-bottom-radius($border-radius); }
+    }
+  }
+
+  .card-header {
+    padding: 0;
+    background-color: transparent;
+    border-bottom-width: 0;
+
+    a {
+      display: block;
+      padding: 15px 20px;
+
+      &.collapsed {
+        &:hover,
+        &:focus { background-color: $gray-lightest; }
+      }
+    }
+  }
+
+  .card-block {
+    padding-top: 0;
+  }
+}
+
+.accordion-head-colored {
+  .card-header a {
+    position: relative;
+    margin: -1px -1px 16px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -.25px;
+  }
+
+  .card-header a.collapsed {
+    background-color: transparent;
+    margin: 0;
+    font-weight: 600;
+  }
+}
+
+.accordion-primary { @include accordion-head-variant($brand-primary); }
+.accordion-success { @include accordion-head-variant($brand-success); }
+.accordion-warning { @include accordion-head-variant($brand-warning); }
+.accordion-danger  { @include accordion-head-variant($brand-danger);  }
+.accordion-info    { @include accordion-head-variant($brand-info);    }
+.accordion-inverse { @include accordion-head-variant($brand-inverse); }
+
+.card-deck-sm {
+  .card:not(:last-child),
+  .card:not(:first-child) {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .card:first-child { margin-left: 0; }
+  .card:last-child { margin-right: 0; }
+}
+
+.card-deck-md {
+  .card:not(:last-child),
+  .card:not(:first-child) {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .card:first-child { margin-left: 0; }
+  .card:last-child { margin-right: 0; }
+}
+
+.card-deck-lg {
+  .card:not(:last-child),
+  .card:not(:first-child) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .card:first-child { margin-left: 0; }
+  .card:last-child { margin-right: 0; }
+}
+
+.card-deck {
+  @media (max-width: 799px) {
+    display: block;
+    .card {
+      &:not(:last-child),
+      &:not(:first-child) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      + .card { margin-top: 20px; }
+    }
+  }
+}
+
+.card-columns {
+  .card { margin-bottom: 20px; }
+
+  @include media-breakpoint-up(sm) { column-count: 2; }
+  @include media-breakpoint-up(lg) { column-count: 3; }
+
+  &.column-count-2 {
+    @include media-breakpoint-up(sm) { column-count: 2;}
+  }
+
+  &.column-count-4 {
+    @media (min-width: 480px) { column-count: 2; }
+    @include media-breakpoint-up(md) { column-count: 3;}
+    @include media-breakpoint-up(lg) { column-count: 4; }
+  }
+
+  &.column-count-5 {
+    @media (min-width: 480px) { column-count: 2; }
+    @include media-breakpoint-up(md) { column-count: 3;}
+    @include media-breakpoint-up(lg) { column-count: 4; }
+    @include media-breakpoint-up(xl) { column-count: 5; }
+  }
+
+  &.column-count-6 {
+    @media (min-width: 480px) { column-count: 2; }
+    @include media-breakpoint-up(md) { column-count: 3;}
+    @include media-breakpoint-up(lg) { column-count: 4; }
+    @include media-breakpoint-up(xl) { column-count: 6; }
+  }
+}
+
+.card-columns-sm {
+  margin-top: -10px;
+  -webkit-column-gap: 10px;
+  column-gap: 10px;
+  .card {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}
+
+.card-columns-md {
+  margin-top: -20px;
+  -webkit-column-gap: 30px;
+  column-gap: 30px;
+  .card { margin-top: 20px; }
+}
+
+.card-columns-lg {
+  margin-top: -30px;
+  -webkit-column-gap: 40px;
+  column-gap: 40px;
+  .card { margin-top: 30px; }
+}

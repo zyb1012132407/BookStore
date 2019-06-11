@@ -1,0 +1,402 @@
+/*! ########## 5.1 Hover ########## */
+
+.hover-grow {
+  @include transform(perspective(1px) translateZ(0));
+  @include transition(transform 0.3s);
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include transform(scale(1.1));
+  }
+}
+
+.effect-fade img {
+  opacity: 1;
+  @include transition(opacity 0.35s);
+
+  &:hover,
+  &:focus {
+    opacity: .8;
+  }
+}
+
+.effect-fade-reverse img {
+  opacity: .7;
+  @include transition(opacity 0.35s);
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.effect-shine,
+.effect-shine-reverse {
+  overflow: hidden;
+  position: relative;
+
+  img {
+  	opacity: 1;
+    @include transform(scale3d(1.05,1.05,1));
+    @include transition(opacity 0.25s, transform 0.25s);
+  }
+
+  figcaption:before {
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	background-color: rgba(#fff,0.1);
+  	content: '';
+    @include transform(scale3d(1.9,1.4,1) rotate3d(0,0,1,55deg) translate3d(0,-120%,0));
+    @include transition(transform 0.35s);
+  }
+
+  &:hover {
+    img {
+      opacity: 0.8;
+      @include transform(scale3d(1,1,1));
+    }
+
+    figcaption::before {
+      @include transform(scale3d(1.9,1.4,1) rotate3d(0,0,1,55deg) translate3d(0,120%,0));
+    }
+  }
+}
+
+.effect-shine-reverse {
+  img {
+    opacity: 0.8;
+    @include transform(scale3d(1,1,1));
+  }
+
+  &:hover {
+    img {
+      opacity: 1;
+      @include transform(scale3d(1.05,1.05,1));
+    }
+  }
+}
+
+.effect-lily {
+  overflow: hidden;
+
+  img {
+  	opacity: 0.7;
+    @include transform(translate3d(-18px,0,0) scale3d(1.1,1.1,1));
+    @include transition(opacity 0.35s, transform 0.35s);
+  }
+
+  figcaption {
+    .text { @include transform(translateY(100%)); }
+
+    .title {
+      @include transform(translateY(60px));
+      @include transition(transform 0.35s);
+    }
+
+    .text {
+      position: relative;
+      bottom: -100%;
+      color: rgba(255,255,255,0.8);
+    	opacity: 0;
+      @include transition(opacity 0.2s, transform 0.35s);
+    }
+  }
+
+  &:hover {
+    img {
+      @include transform(translate3d(0,0,0) scale3d(1.1,1.1,1));
+    }
+
+    img { opacity: 1; }
+    .text { opacity: .8; }
+
+    .title,.text { @include transform(translateY(0)); }
+
+    .text {
+      -webkit-transition-delay: 0.05s;
+    	transition-delay: 0.05s;
+    	-webkit-transition-duration: 0.35s;
+    	transition-duration: 0.35s;
+    }
+  }
+}
+
+.effect-bubba {
+  img {
+  	opacity: 1;
+    @include transition(opacity 0.35s);
+  }
+
+  figcaption {
+    &::before,
+    &::after {
+    	position: absolute;
+    	top: 30px;
+    	right: 30px;
+    	bottom: 30px;
+    	left: 30px;
+    	content: '';
+    	opacity: 0;
+      @include transition(opacity 0.35s, transform 0.35s);
+    }
+
+    &::before {
+    	border-top: 1px solid #fff;
+    	border-bottom: 1px solid #fff;
+      @include transform(scale(0,1));
+    }
+
+    &::after {
+    	border-right: 1px solid #fff;
+    	border-left: 1px solid #fff;
+      @include transform(scale(1,0));
+    }
+
+    .title {
+    	padding-top: 30%;
+      @include transform(translate3d(0,-20px,0));
+      @include transition(transform 0.35s);
+    }
+
+    .text {
+    	padding: 20px 2.5em;
+    	opacity: 0;
+      @include transform(translate3d(0,20px,0));
+      @include transition(opacity 0.35s, -webkit-transform 0.35s);
+    }
+  }
+
+  &:hover {
+    img { opacity: 0.4; }
+
+    figcaption {
+      &::before,
+      &::after {
+      	opacity: 1;
+        @include transform(scale(1));
+      }
+
+      .title,
+      .text {
+      	opacity: 1;
+        @include transform(translate3d(0,0,0));
+      }
+    }
+  }
+}
+
+.effect-ming {
+  img {
+  	opacity: 0.9;
+    @include transition(opacity 0.35s);
+  }
+
+  figcaption {
+    &::before {
+    	position: absolute;
+    	top: 30px;
+    	right: 30px;
+    	bottom: 30px;
+    	left: 30px;
+    	border: 2px solid #fff;
+    	box-shadow: 0 0 0 30px rgba(255,255,255,0.2);
+    	content: '';
+    	opacity: 0;
+      @include transform(scale3d(1.4,1.4,1));
+      @include transition(opacity 0.35s, transform 0.35s);
+    }
+
+    &
+    .title {
+    	margin: 20% 0 10px 0;
+      @include transition(transform 0.35s);
+    }
+
+    .text {
+    	padding: 1em;
+    	opacity: 0;
+      @include transform(scale(1.5));
+      @include transition(opacity 0.35s, transform 0.35s);
+    }
+  }
+
+  .text,
+  &:hover title {
+    @include transform(scale(0.9));
+  }
+
+  &:hover {
+    figcaption::before,
+    p {
+    	opacity: 1;
+      @include transform(scale3d(1,1,1));
+    }
+
+    figcaption { background-color: rgba(58,52,42,0); }
+    img { opacity: 0.4; }
+  }
+}
+
+
+.effect-julia {
+  overflow: hidden;
+
+  img {
+  	opacity: 1;
+    @include transform(scale3d(1,1,1));
+    @include transition(opacity 0.35s, -webkit-transform 0.35s);
+  }
+
+  figcaption { text-align: left; }
+
+  .title {
+  	position: relative;
+    padding-bottom: 10px;
+    @include transform(translateY(20px));
+    @include transition(transform 0.35s);
+  }
+
+  p {
+  	margin: 0;
+    padding: 2px;
+  	text-transform: none;
+    @include transform(translate3d(-360px,0,0));
+    @include transition(opacity 0.35s, transform 0.35s);
+
+    &:first-child {
+    	-webkit-transition-delay: 0.15s;
+    	transition-delay: 0.15s;
+    }
+
+    &:nth-of-type(2) {
+    	-webkit-transition-delay: 0.1s;
+    	transition-delay: 0.1s;
+    }
+
+    &:nth-of-type(3) {
+    	-webkit-transition-delay: 0.05s;
+    	transition-delay: 0.05s;
+    }
+
+    + p { margin-top: 5px; }
+  }
+
+  &:hover {
+    .title { @include transform(translateY(0)); }
+
+    p {
+      &:first-child {
+      	-webkit-transition-delay: 0s;
+      	transition-delay: 0s;
+      }
+
+      &:nth-of-type(2) {
+      	-webkit-transition-delay: 0.05s;
+      	transition-delay: 0.05s;
+      }
+
+      &:nth-of-type(3) {
+      	-webkit-transition-delay: 0.1s;
+      	transition-delay: 0.1s;
+      }
+
+      opacity: 1;
+      @include transform(translate3d(0,0,0));
+    }
+
+    img {
+      opacity: 0.8;
+      @include transform(scale3d(1.05,1.05,1));
+    }
+  }
+}
+
+.effect-duke {
+  overflow: hidden;
+	background: -webkit-linear-gradient(-45deg, #34495e 0%,#cc6055 100%);
+	background: linear-gradient(-45deg, #34495e 0%,#cc6055 100%);
+
+  img,
+  .text {
+    @include transition(opacity 0.35s, transform 0.35s);
+  }
+
+  .title {
+  	-webkit-transition: -webkit-transform 0.35s;
+  	transition: transform 0.35s;
+  	-webkit-transform: scale3d(0.8,0.8,1);
+  	transform: scale3d(0.8,0.8,1);
+  	-webkit-transform-origin: 50% 100%;
+  	transform-origin: 50% 100%;
+  }
+
+  .text {
+  	position: absolute;
+  	bottom: 0;
+  	left: 0;
+  	margin: 30px;
+  	padding: 20px;
+  	border: 1px solid #fff;
+  	text-transform: none;
+  	opacity: 0;
+  	-webkit-transform: scale3d(0.8,0.8,1);
+  	transform: scale3d(0.8,0.8,1);
+  	-webkit-transform-origin: 50% -100%;
+  	transform-origin: 50% -100%;
+  }
+
+
+  &:hover {
+  	img {
+      opacity: 0.1;
+      @include transform(scale3d(2,2,1));
+    }
+
+    .title,
+    .text {
+     opacity: 1;
+     -webkit-transform: scale3d(1,1,1);
+     transform: scale3d(1,1,1);
+   }
+  }
+}
+
+.effect-sansa {
+  overflow: hidden;
+  background-color: #fff;
+
+  img {
+    opacity: 1;
+    transform: scale3d(1.02,1.02,1);
+    transition: opacity 4s, transform 4s;
+  }
+
+  &:hover {
+    img {
+      opacity: .85;
+      transform: scale3d(1.1,1.1,1);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+  }
+}
+
+
+// Link Hover Background
+.hover-bg-gray-lightest {
+  &:hover,
+  &:focus { background-color: $gray-lightest; }
+}
+
+.hover-bg-gray-lighter {
+  &:hover,
+  &:focus { background-color: $gray-lighter; }
+}
+
+.hover-bg-inverse {
+  &:hover,
+  &:focus { background-color: $gray-dark; }
+}

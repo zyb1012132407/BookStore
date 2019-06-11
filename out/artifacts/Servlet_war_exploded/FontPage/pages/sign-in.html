@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>用户登录</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../js/blockbox.js"></script>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+
+<body class="tx-size-sm bg-img-placehold" style="background-image: url('../image/sign-in.jpg');">
+
+  <div class="pos-absolute a-0 bg-opacity-inverse-5">
+    <div class="pd-l-20 pd-t-25">
+      <a href="index.html" class="tx-white tx-size-24 tx-spacing-neg-2 tx-bold"><i class="icon ion-cube tx-primary tx-size-22"></i> BookStore</a>
+    </div>
+  </div>
+
+  <div class="overlay-block bg-white pd-40 wd-100p wd-sm-350 pos-left-auto d-flex align-items-center" id="app">
+    <div class="wd-100p">
+
+      <h2 class="tx-gray-dark  tx-center">登 录</h2>
+      <p class="tx-size-sm mg-b-30 tx-center">输入信息 And 寻找快乐</p>
+
+      <div v-if="showTip === 'success'" class="alert alert-success alert-dismissible fade show">
+          <strong>登录成功</strong> 即将跳转个人中心！
+      </div>
+      <div v-else-if="showTip === 'error'" class="alert alert-danger alert-dismissible fade show">
+           <strong>登录失败</strong> {{errorTipContent}}
+      </div>
+      <div v-else-if="showTip === 'waiting'" class="alert alert-info alert-dismissible fade show">
+          <strong>正在登陆</strong> 请稍等
+      </div>
+
+      <div class="form-group">
+        <input v-model="user.username" maxlength="17" class="form-control tx-size-sm" placeholder="用户名" type="text">
+      </div><!-- form-group -->
+      <div class="form-group">
+        <input v-model="user.password" maxlength="17" class="form-control tx-size-sm" placeholder="密码" type="password">
+      </div><!-- form-group -->
+      <div class="form-group form-inline">
+        <input v-model="check_code" maxlength="4" class="form-control tx-size-sm" placeholder="验证码" type="text" style="width: 150px;">
+        <img v-on:click="getCheckImage" v-bind:src="check_code_img" style="margin-left: 20px;">
+      </div><!-- form-group -->
+      <p class="mg-b-30 tx-size-xs"><a href="">忘记密码?</a></p>
+      <a v-on:click="submitUser(user)" class="btn btn-inverse tx-size-sm d-block"> 登录</a>
+      <p class="tx-size-xs mg-t-30 mg-b-0 tx-center bd pd-y-15 lh-1">不是会员? <a href="sign-up.html">注 册</a></p>
+      {{user.username + " " + user.password + " " + check_code + " "}}
+    </div>
+  </div><!-- overlay-block -->
+
+<script>
+  var m = new Vue({
+        el: '#app',
+        data () {
+                return {
+                    user:{
+                        username:null,
+                        password:null,
+                    },
+                    checkWrong:{
+                        accountIsNotExist:false,
+                        accountWrong:false,
+                        badOperation:false,
+                        checkCodeWrong:false,
+                    },
+                    networkWaiting:true,
+                    showTip:" ",
+                    check_code:null,
+                    check_code_img:null,
+                    errorTipContent:"未知错误",
+                }
+            },
+        created: async function(){
+            await this.isLogin()
+            this.getCheckImage()
+        },
+        methods:{
+            
+            submitUser:function(user) {
+                this.checkInformation(user)
+            },
+            checkInformation: async function(user){
+                var _this = this
+                if(user.username === null || user.username === ''){
+                    this.$set(this,'showTip','error');
+                    this.$set(this,'errorTipContent','用户名不能为空',true);
+                }else if(user.password === null || user.password === ''){
+                    this.$set(this,'showTip','error');
+                    this.$set(this,'errorTipContent','密码不能为空',true);
+                }else if (user.username.indexOf(' ') != -1){
+                    this.$set(this,'showTip','error');
+                    this.$set(this,'errorTipContent','用户名不能含空格',true);
+                }else if(user.password.indexOf(' ') != -1){
+                    this.$set(this,'showTip','error');
+                    this.$set(this,'errorTipContent','密码不能含空格',true);
+                }else{
+                  this.networkWaiting = true;
+                  this.checkWrong.accountIsNotExist = false;
+                  this.checkWrong.accountWrong = false;
+                  this.checkWrong.checkCodeWrong = false;
+                  this.checkWrong.badOperation = false;
+                  while(this.networkWaiting){
+                      await this.post(user);
+                      this.$set(this,'showTip','waiting');
+                      await this.sleep(300);
+                  }
+                  if(this.checkWrong.accountIsNotExist){
+                      this.$set(this,'showTip','error');
+                      this.$set(this,'errorTipContent','用户不存在',true);
+                  }else if(this.checkWrong.accountWrong){
+                      this.$set(this,'showTip','error');
+                      this.$set(this,'errorTipContent','用户名或密码错误',true);
+                  }else if(this.checkWrong.checkCodeWrong){
+                      this.$set(this,'showTip','error');
+                      this.$set(this,'errorTipContent','验证码错误',true);
+                  }else if(this.checkWrong.badOperation){
+                      this.$set(this,'showTip','error');
+                      this.$set(this,'errorTipContent','服务器错误，正在抢修',true);
+                  }else{
+                      this.$set(this,'showTip','success');
+                      // 跳转网页
+                      await this.sleep(1500);
+                      this.routeForNewWeb();
+                  }
+                }
+                
+            },
+            sleep:function (ms) {
+              return new Promise(resolve => setTimeout(resolve, ms));
+            },
+            post: async function (user) {
+                //发送 post 请求
+                await this.$http.post('/Servlet/CheckAccountSignInServlet', {
+                    newUser:user,
+                    check_code:this.check_code,
+                }, {emulateJSON: true}).then(function (res){
+                  if((String(res.body)).indexOf("usernameIsNotExist") != -1){
+                      this.checkWrong.accountIsNotExist = true;
+                  }else if((String(res.body)).indexOf("passwordWrong") != -1){
+                    this.checkWrong.accountWrong = true;
+                  }else if((String(res.body)).indexOf("checkCodeWrong") != -1){
+                    this.checkWrong.checkCodeWrong = true;
+                  }else if(!((String(res.body)).indexOf("true") != -1)){
+                    this.checkWrong.badOperation = true;
+                  }
+                  this.networkWaiting = false;             
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+            getCheckImage: function () {
+              this.$set(this,'check_code_img',"/Servlet/CheckCodeServlet?" + Math.random());
+            },
+
+            isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  if(res.body[0].isLogin != null){
+                    if((String(res.body[0].isLogin)).indexOf("true") != -1){
+                      this.routeForNewWeb();
+                    }
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+            routeForNewWeb:function(){
+              window.location.href = '/Servlet/FontPage/pages/dashboard-userIndex.html';
+            },
+
+        }
+    })
+</script>
+  
+
+</body>
+</html>

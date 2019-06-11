@@ -1,0 +1,22 @@
+/*! ########## 3.5 Carousel ########## */
+
+.carousel-indicators-square {
+  position: static;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    opacity: .5;
+    + li { margin-left: 5px; }
+
+    &.active { opacity: 1; }
+
+    &:hover,
+    &:focus { cursor: pointer; }
+  }
+}

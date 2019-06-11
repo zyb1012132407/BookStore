@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../favicon.ico">
+
+  <title>网上书城</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+  </style>
+
+</head>
+
+  <body class="landing-6 pos-relative tx-size-14" data-spy="scroll" data-target="#navbarMain">
+
+    <div id="headPanel" class="headpanel pos-fixed-top z-index-100 shadow-1">
+      <div class="container">
+        <div class="ht-70 d-flex align-items-center justify-content-between">
+          <h5 class="tx-size-sm-24 mg-b-0 tx-bold tx-spacing-neg-2">
+            <a href="#" class="tx-white"><i class="icon ion-cube tx-size-22"></i> BookStore</a>
+          </h5>
+          <div id="app" v-cloak>
+            <ul id="navbarMain" class="nav nav-white tx-spacing-3 flex-column flex-md-row hidden-sm-down tx-uppercase tx-bold tx-size-11">
+              <li class="nav-item"><a href="#sectionHome" class="nav-link">主页</a></li>
+              <li class="nav-item"><a href="#sectionAbout" class="nav-link">特点</a></li>
+              <li class="nav-item"><a href="#sectionTeam" class="nav-link">好书</a></li>
+              <li class="nav-item"><a href="#sectionServices" class="nav-link">服务</a></li>
+              <li v-if="isLogin_index" class="nav-item"><a href="/Servlet/FontPage/pages/dashboard-userIndex.html" class="nav-link pd-r-0">个人中心</a></li>
+              <li v-else class="nav-item"><a href="/Servlet/FontPage/pages/sign-in.html" class="nav-link pd-r-0">登录</a></li>
+            </ul>
+            <a id="showMenu" href="" class="show-nav tx-white tx-size-18 hidden-md-up"><i class="fa fa-navicon"></i></a>
+          </div>
+        </div><!-- ht-70 -->
+      </div><!-- container -->
+    </div><!-- headpanel -->
+
+    <div id="sectionHome" class="header-home container-wrapper ht-100v bg-inverse pd-0">
+      <div id="carouselWork" class="carousel slide d-flex wd-100p ht-100p" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselWork" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselWork" data-slide-to="1"></li>
+          <li data-target="#carouselWork" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item ht-100p active">
+            <img class="wd-100p ht-100p object-fit-cover" src="../image/index_bg1.jpeg" alt="First slide">
+            <div class="carousel-caption pos-absolute a-0 d-flex align-items-end align-items-lg-center justify-content-center bg-opacity-black-5">
+              <div class="pd-y-30 pd-lg-y-60 pd-x-20 pd-lg-x-0">
+                <h6 class="tx-size-14 tx-size-lg-24 tx-normal">给你全新的购书体验</h6>
+                <h4 class="tx-size-lg-64 tx-light">购书&nbsp;&nbsp;从现在开始</h4>
+                <p class="tx-size-12 tx-size-lg-18 op-2 wd-lg-60p mg-x-auto">书是美景，读书是饱览美景。足不出户，你可以遍游于千山万水，徜详于长江黄河之间，看一道残阳铺水中，半江瑟瑟半江红的春江胜景，感忽如一夜春风来，千树万树梨花开的雪景，更有那鱼水之乐游鱼细石，直视无碍.</p>
+                <button onclick="location.href='shop-pages.html'" type="button" class="btn btn-outline-secondary mg-t-10" style="width: 150px;height: 50px;">开始购物</button>
+              </div>
+            </div><!-- carousel-caption -->
+          </div>
+          <div class="carousel-item ht-100p">
+            <img class="wd-100p ht-100p object-fit-cover" src="../image/index_bg2.jpg" alt="Second slide">
+            <div class="carousel-caption pos-absolute a-0 d-flex align-items-end align-items-lg-center justify-content-center bg-opacity-black-3">
+              <div class="pd-y-30 pd-lg-y-60 pd-x-20 pd-lg-x-0">
+                <h6 class="tx-size-14 tx-size-lg-24 tx-normal">书，能带来最沉浸的体验</h6>
+                <h4 class="tx-size-lg-64 tx-light">逃进&nbsp;&nbsp;书中</h4>
+                <p class="tx-size-12 tx-size-lg-18 op-2 wd-lg-60p mg-x-auto">读书可以建立信心。信心是成功的催化剂。在当今时代，信心的力量更不可忽视。读书，你可以知道，要存鹰之志于高远，取鹰之志于凌云。你可以知道石在，火种是不会绝的。你更可以知道星星之火，就足以燎原。所以你不会绝望，不会放弃。面对困难，你永远是一颗蒸不烂、捶不扁、炒不爆的铜豌豆!</p>
+                <button onclick="location.href='notice-board.html'" type="button" class="btn btn-outline-secondary mg-t-10" style="width: 150px;height: 50px;">查看公告</button>
+              </div>
+            </div><!-- carousel-caption -->
+          </div>
+          <div class="carousel-item ht-100p">
+            <img class="wd-100p ht-100p object-fit-cover" src="../image/index_bg3.jpg" alt="Third slide">
+            <div class="carousel-caption pos-absolute a-0 d-flex align-items-end align-items-lg-center justify-content-center bg-opacity-black-3">
+              <div class="pd-y-30 pd-lg-y-60 pd-x-20 pd-lg-x-0">
+                <h6 class="tx-size-14 tx-size-lg-24 tx-normal">睡前怎能不来一本好书？</h6>
+                <h4 class="tx-size-22 tx-size-lg-64 tx-light">好书伴你入眠</h4>
+                <p class="tx-size-12 tx-size-lg-18 op-2 wd-lg-60p mg-x-auto">持一本好书，如乘一叶扁舟弄潮于知识的浪巅，纵然惊、险、奇、难，然而纵横于天地之间，集天地之灵气，日月之精华，方铸成一把金闪闪的钥匙--开启智慧之门.</p>
+                <button onclick="location.href='dashboard-userIndex.html'" type="button" class="btn btn-outline-secondary mg-t-10" style="width: 150px;height: 50px;">个人中心</button>
+              </div>
+            </div><!-- carousel-caption -->
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselWork" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselWork" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div><!-- carousel -->
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper">
+      <div id="sectionAbout" class="ht-60 bg-gray pos-absolute-top t-neg-60 op-0"></div>
+      <div class="container tx-center">
+        <h5 class="tx-size-xs-24 tx-size-md-28 tx-size-lg-32 tx-inverse lh-5 tx-normal tx-spacing-neg-2 mg-b-25">一本书就是一个世界，把你的心灵变成最智慧的所在，本书店只出售智慧和经典。</h5>
+        <p class="tx-size-14 tx-size-md-16 tx-size-lg-18 wd-lg-80p mg-x-auto mg-b-0">读书最大的乐趣就是从中找到自己不知道的事情。里面有对社会现象的批判，美丽风景的描写，鲜为人知的秘密与故事，中外风土人情的讲述，对奥秘的探索，还有一个个催人奋发向上，给人鼓励的感人事迹。.</p>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper pos-relative pd-t-0">
+      <div class="container tx-center">
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+            <i class="icon ion-ios-bookmarks-outline tx-size-96 lh-0 tx-gray"></i>
+            <h5 class="tx-inverse mg-y-20">优质书源</h5>
+            <p class="mg-b-0 tx-size-12 tx-size-sm-14">我们的书都是从Cache的蓝门带来的，中途没有封一颗烟，保证书的完整</p>
+          </div><!-- col-3 -->
+          <div class="col-md-6 col-lg-3 mg-t-40 mg-md-t-0">
+            <i class="icon ion-ios-briefcase-outline tx-size-96 lh-0 tx-gray"></i>
+            <h5 class="tx-inverse mg-y-20">运输快捷</h5>
+            <p class="mg-b-0 tx-size-12 tx-size-sm-14">书籍全由年轻人运送，运输速度堪比白给速度</p>
+          </div><!-- col-3 -->
+          <div class="col-md-6 col-lg-3 mg-t-40 mg-lg-t-0">
+            <i class="icon ion-ios-list-outline tx-size-96 lh-0 tx-gray"></i>
+            <h5 class="tx-inverse mg-y-20">交易便利</h5>
+            <p class="mg-b-0 tx-size-12 tx-size-sm-14">不用再担心4750黑洞，我们的交易公开透明</p>
+          </div><!-- col-3 -->
+          <div class="col-md-6 col-lg-3 mg-t-40 mg-lg-t-0">
+            <i class="icon ion-ios-folder-outline tx-size-96 lh-0 tx-gray"></i>
+            <h5 class="tx-inverse mg-y-20">界面美观</h5>
+            <p class="mg-b-0 tx-size-12 tx-size-sm-14">一键connent,一键quit,成为quitzera只需要3天</p>
+          </div><!-- col-3 -->
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper bg-superlight pd-y-40 pd-xs-y-60 pd-xl-y-80 pd-x-20 pd-xs-x-40 pd-sm-x-0">
+      <div id="sectionTeam" class="ht-60 bg-gray pos-absolute-top t-neg-60 op-0"></div>
+      <h4 class="tx-normal tx-size-xs-32 tx-size-md-40 tx-inverse tx-spacing-neg-2 lh-5 mg-b-0 tx-center">经典好书</h4>
+      <p class="tx-size-14 tx-size-md-16 tx-size-xl-18 tx-center mg-b-0">秋读书，玉露凉，钻科研，学文章。</p>
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper pos-relative pd-t-0">
+      <div class="container">
+        <div class="row row-lg mg-t-20 mg-xl-t-50">
+          <div class="col-sm-6 col-xl-3 tx-center">
+            <img src="/Servlet/FontPage/image/index_product_01.jpg" class="img-fluid" alt="">
+            <h6 class="tx-size-18 tx-inverse mg-t-15 mg-b-5">图书1</h6>
+            <p class="tx-gray-light tx-uppercase tx-spacing-1 tx-size-11 tx-medium mg-b-5">图书描述1</p>
+          </div><!-- col-->
+          <div class="col-sm-6 col-xl-3 tx-center mg-t-40 mg-sm-t-0">
+            <img src="/Servlet/FontPage/image/index_product_02.jpg" class="img-fluid" alt="">
+            <h6 class="tx-size-18 tx-inverse mg-t-15 mg-b-5">图书2</h6>
+            <p class="tx-gray-light tx-uppercase tx-size-11 tx-spacing-1 tx-medium mg-b-5">图书描述2</p>
+          </div><!-- col-->
+          <div class="col-sm-6 col-xl-3 tx-center mg-t-40 mg-xl-t-0">
+            <img src="/Servlet/FontPage/image/index_product_03.jpg" class="img-fluid" alt="">
+            <h6 class="tx-size-18 tx-inverse mg-t-15 mg-b-5">图书3</h6>
+            <p class="tx-gray-light tx-uppercase tx-size-11 tx-spacing-1 tx-medium mg-b-5">图书描述3</p>
+          </div><!-- col-->
+          <div class="col-sm-6 col-xl-3 tx-center mg-t-40 mg-xl-t-0">
+            <img src="/Servlet/FontPage/image/index_product_04.jpg" class="img-fluid" alt="">
+            <h6 class="tx-size-18 tx-inverse mg-t-15 mg-b-5">图书4</h6>
+            <p class="tx-gray-light tx-uppercase tx-size-11 tx-spacing-1 tx-medium mg-b-5">图书描述4</p>
+          </div><!-- col-->
+        </div><!-- row -->
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper bg-superlight pd-y-40 pd-xs-y-60 pd-xl-y-80">
+
+      <!-- link target holder -->
+      <div id="sectionServices" class="ht-60 bg-gray pos-absolute-top t-neg-60 op-0"></div>
+
+      <h4 class="tx-normal tx-size-xs-32 tx-size-md-40 tx-inverse lh-5 mg-b-0 tx-center">我们的服务</h4>
+      <p class="tx-size-14 tx-size-md-16 tx-size-xl-18 tx-center mg-b-0">什么是服务？今天，我们，将重新定义服务</p>
+    </div><!-- container-wrapper -->
+
+    <div class="container-wrapper">
+      <div class="container">
+        <div class="row row-lg">
+          <div class="col-md-6">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-albums-outline tx-size-64 icon-lh-0 tx-gray"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">书籍种类</h5>
+                <p class="tx-size-14 mg-b-0">我们努力为您创造一个书的世界。您可以找到各个年代，各个作家的书籍。</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+
+          <div class="col-md-6 mg-t-30 mg-md-t-0">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-briefcase-outline tx-size-64 icon-lh-0 tx-gray wd-50"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">运输快捷</h5>
+                <p class="tx-size-14 mg-b-0">书籍全由年轻人运送，运输速度堪比白给速度</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+
+          <div class="col-md-6 mg-t-30 mg-md-t-40">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-camera-outline tx-size-64 icon-lh-0 tx-gray wd-50"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">印刷质量</h5>
+                <p class="tx-size-14 mg-b-0">我们极力去改善我们印刷质量，力求将其做到胶片水平</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+
+          <div class="col-md-6 mg-t-30 mg-md-t-40">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-list-outline tx-size-64 icon-lh-0 tx-gray wd-50"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">界面简洁</h5>
+                <p class="tx-size-14 mg-b-0">轻松点击，便可获取您想要的内容</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+
+          <div class="col-md-6 mg-t-30 mg-md-t-40">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-cart-outline tx-size-64 icon-lh-0 tx-gray wd-50"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">购物便捷</h5>
+                <p class="tx-size-14 mg-b-0">购物方便，快递迅捷</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+
+          <div class="col-md-6 mg-t-30 mg-md-t-40">
+            <div class="media d-block d-sm-flex align-items-start">
+              <div class="wd-60 tx-center"><i class="icon ion-ios-game-controller-b-outline tx-size-64 icon-lh-0 tx-gray wd-50"></i></div>
+              <div class="media-body mg-sm-l-20 mg-t-10 mg-sm-t-0">
+                <h5 class="tx-inverse tx-uppercase tx-semibold">交流(实验中)</h5>
+                <p class="tx-size-14 mg-b-0">五人白给，岂不妙哉</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- col-6 -->
+        </div><!-- row -->
+      </div>
+    </div><!-- container-wrapper -->
+
+
+    <div class="container-wrapper bg-superlight pd-y-60">
+      <div class="container d-lg-flex align-items-center justify-content-between">
+        <div class="media d-block d-md-flex align-items-center mg-b-20 mg-lg-b-0">
+          <i class="icon ion-ios-paper-outline tx-size-64 lh-0 tx-inverse"></i>
+          <div class="media-body mg-md-l-20 mg-t-10 mg-md-t-0">
+            <h4 class="tx-inverse mg-b-3 lh-3">开始进入书的世界</h4>
+            <p class="mg-b-0">岭外音书断，经冬复历春</p>
+          </div>
+        </div><!-- media -->
+
+        <a href="shop-pages.html" class="btn btn-outline-inverse bd-2 pd-y-12 pd-x-30">
+          <span class="tx-uppercase tx-bold tx-size-11 tx-spacing-4">进入书城</span>
+        </a>
+      </div><!-- container -->
+    </div><!-- container-wrapper -->
+
+    <footer class="container-wrapper">
+      <div class="container">
+        
+        <hr class="bg-gray op-1">
+
+        <div class="d-md-flex justify-content-between align-items-center">
+          <nav class="nav nav-gray-light tx-size-13 flex-column flex-sm-row">
+            <a href="#" class="nav-link pd-l-0">首页</a>
+            <a href="#" class="nav-link pd-l-0 pd-lg-l-15">关于</a>
+            <a href="#" class="nav-link pd-l-0 pd-lg-l-15">合作伙伴</a>
+            <a href="#" class="nav-link pd-l-0 pd-lg-l-15">隐私政策</a>
+            <a href="#" class="nav-link pd-l-0 pd-lg-l-15">后台管理</a>
+          </nav>
+          <span class="tx-size-13 d-inline-block mg-t-20 mg-md-t-0">&copy; 2019 网上书城系统.</span>
+        </div><!-- d-flex -->
+      </div><!-- container -->
+    </footer><!-- container-wrapper -->
+
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/tether/tether.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <script src="../lib/modernizr/modernizr.js"></script>
+    <script src="../js/blockbox.demo.js"></script>
+    <script>
+      $(function(){
+
+        // header effect on scroll
+        function animateHead() {
+          if($(document).scrollTop() > 200) {
+            $('body').addClass('head-scroll');
+          } else {
+            $('body').removeClass('head-scroll');
+          }
+        }
+        animateHead();
+
+        $(window).scroll(function() {
+          animateHead();
+        });
+
+
+        // animated smooth scroll on target from top menu
+        $('#navbarMain .nav-link').on('click', function(e){
+          //auto hide menu, mobile only
+          $('#navbarMain').addClass('hidden-sm-down');
+
+          var target = $(this).attr('href');
+          $('html, body').animate({
+            scrollTop: $(''+target).offset().top
+          }, 500);
+
+          e.preventDefault();
+        });
+      });
+
+      $('#showMenu').on('click', function(){
+        if($('#navbarMain').hasClass('hidden-sm-down')) {
+          $('#navbarMain').removeClass('hidden-sm-down');
+          $('#navbarMain').addClass('nav-mobile');
+        } else {
+          $('#navbarMain').addClass('hidden-sm-down');
+          $('#navbarMain').removeClass('nav-mobile');
+        }
+        return false;
+      });
+
+    </script>
+    <script>
+      var vm = new Vue({
+        el:"#app",
+        data(){
+          return {
+            isLogin_index:false,
+          }
+        },
+        created:async function(){
+          await this.isLogin();
+        },
+        methods:{
+          isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  console.log(res.body)
+                  if(res.body[0].isLogin != null){
+                    if((String(res.body[0].isLogin)).indexOf("true") != -1){
+                      this.isLogin_index = true;
+                    }else{
+                      this.isLogin_index = false;
+                    }
+                  }else{
+                    this.isLogin_index = false;
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+        },
+
+      })
+    </script>
+  </body>
+</html>

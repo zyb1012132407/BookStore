@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>【管理】公告管理</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/morris.js/morris.css" rel="stylesheet">
+  <link href="../lib/air-datepicker/datepicker.min.css" rel="stylesheet">
+  <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <link href="../css/line-awesome.min.css" rel="stylesheet">
+  <link href="../css/blockbox-templates.css" rel="stylesheet">
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../lib/raphael/raphael.min.js"></script>
+  <script src="../lib/moment/moment.js"></script>
+  <script src="../lib/chart.js/Chart.js"></script>
+  <script src="../lib/morris.js/morris.js"></script>
+  <script src="../lib/peity/jquery.peity.js"></script>
+  <script src="../lib/air-datepicker/datepicker.min.js"></script>
+  <script src="../lib/air-datepicker/datepicker.en.js"></script>
+  <script src="../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+
+  <script src="../js/blockbox.js"></script>
+  <script src="../js/blockbox.dashboard.js"></script>
+
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+    .modal-backdrop{z-index:0;}
+  </style>
+</head>
+
+<body class="dashboard-2 bg-gray-lighter tx-size-13">
+<div id="app" v-cloak>
+  <div class="headpanel pos-fixed-top bg-gray-dark ht-70 pd-lg-l-240 z-index-100 d-flex align-items-center justify-content-between">
+    <div class="headpanel-logo pos-absolute t-0 l-neg-240 l-lg-0 bg-gray-darker ht-70 wd-240 d-flex align-items-center pd-x-20">
+      <a href="index.html" class="tx-size-24 tx-medium tx-spacing-neg-4 tx-white">
+        <i class="fa fa-cube"></i> BookStore <span class="tx-light tx-info-light">dash</span>
+      </a>
+    </div><!-- headpanel-logo -->
+    <div class="pd-x-20 d-flex align-items-center">
+    </div>
+
+    <div class="pd-x-20">
+      <nav class="nav nav-inline align-items-center justify-content-end flex-row">
+        <a href="#" id="searchmenu" class="nav-link tx-white hidden-sm-up"><i class="fa fa-search"></i></a>
+        <a href="" class="nav-link tx-white pd-r-5 pos-relative mg-l-auto">
+          <i class="fa fa-envelope tx-size-16"></i>
+          <span class="pos-absolute t-10 r-0 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="nav-link tx-white mg-r-5 pos-relative">
+          <i class="fa fa-bell tx-size-16"></i>
+          <span class="pos-absolute t-10 r-10 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="tx-white nav-link tx-size-13 pd-r-5 pd-md-r-10"><img v-bind:src="'/Servlet/file/image/user/' + adminUser.username + '.png'" onerror="this.src='../image/user_default.png'" class="rounded-circle wd-32" alt=""></a>
+        <div class="dropdown">
+          <a href="" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{adminUser.username}} </span><i class="fa fa-angle-down mg-l-5"></i></a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-inverse bg-gray-darker tx-size-13 bd-0 mg-t-18 rounded-top-0 shadow-none">
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userInformationManage.html"><i class=""></i> 修改资料</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userIndex.html">查看个人主页</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html">账户设置</a>
+            <!-- <a class="dropdown-item" href="#">Privacy Settings</a> -->
+            <a class="dropdown-item" v-on:click="logout" href="#">登出</a>
+          </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+      </nav>
+    </div>
+  </div><!-- headpanel -->
+
+  <div class="leftpanel pos-fixed-left t-70 l-neg-240 l-lg-0 bg-info-light wd-240 pd-y-20">
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20">个人管理</h6>
+    <ul class="nav nav-gray-dark nav-stacked flex-column lh-10 wd-100p mg-t-10 tx-size-13">
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userIndex.html" class="nav-link"><i class="fa fa-external-link-square wd-16 tx-center mg-r-5"></i> 个人主页</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userInformationManage.html" class="nav-link"><i class="fa fa-mouse-pointer tx-center wd-16 mg-r-5"></i> 修改资料</a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="dashboard-userOrderManage.html" class="nav-link"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 账户设置</a>
+      </li>
+    </ul>
+  <div v-if="isAdmin">
+      <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">后台管理权限</h6>
+      <ul class="nav nav-gray-dark nav-stacked flex-column wd-100p mg-t-10 tx-size-13">
+        <li class="nav-item">
+          <a href="#" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 公告管理</a>
+        </li>
+        <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userManage-Admin.html" class="nav-link"><i class="fa fa-file-text tx-center wd-16 mg-r-5"></i> 用户管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-bookManage-Admin.html" class="nav-link"><i class="fa fa-navicon wd-16 tx-center mg-r-5"></i> 图书管理</a>
+      </li> 
+        <li class="nav-item">
+          <a href="#" class="nav-link active"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+        </li>
+
+      </ul>
+  </div>
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">版本信息</h6>
+    <p class="pd-x-20 tx-gray tx-size-12">仅供测试版本.</p>
+  </div><!-- leftpanel -->
+
+  <div class="main pos-fixed t-70 r-0 b-0 l-0 l-lg-240">
+    <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+      <h5 class="tx-inverse tx-bold mg-b-0">订单管理</h5>
+                                      
+      <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+        <a class="breadcrumb-item" href="#">控制台</a>
+        <span class="breadcrumb-item active">订单管理</span>
+      </nav>
+    </div><!-- main-header -->
+    <div class="main-body pd-20">
+      <div class="row">
+        <div class="col-xl-12">
+
+          
+
+          <div class="container pd-x-0 mg-t-20 bg-white">
+
+            <table class="table table-responsive d-xs-table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>用户名</th>
+                  <th>书籍ISBN</th>
+                  <th>总花费</th>
+                  <th>是否支付</th>
+                  <th>时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody v-for="order in orders">
+                  <tr>
+                    <th scope="row">{{order.id}}</th>
+                    <td>{{order.username}}</td>
+<!--                     <td>{{order.DI_name}}</td>
+                    <td>{{order.DI_position}}</td>
+                    <td>{{order.DI_phonenumber}}</td> -->
+                    <td>{{order.books_ISBN}}</td>
+                    <td>{{order.price}}</td>
+                    <td>{{order.isPaid}}</td>
+                    <!-- <td>{{order.num}}</td> -->
+                    <td>{{order.date}}</td>
+
+                    <td>
+                      <button v-on:click="startUpdate(order.id)" class="btn btn-primary" data-toggle="modal" data-target="#modaldemo1">修改</button>
+                      <button v-on:click="deleteOrder(order.id)" class="btn btn-danger mg-l-20">删除</button>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div><!-- container -->
+        </div><!-- col-12 -->
+      </div><!-- row -->
+    </div><!-- main-body -->
+  </div><!-- main -->
+
+  <div class="modal fade" id="modaldemo1" style="z-index:99999">
+    <div class="modal-dialog" style="top:90px;">
+      <div class="modal-content">
+            <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">修改订单</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            <!-- 模态框主体 -->
+        <div class="modal-body">
+          订单ID:<input v-model="newOrder.id" class="form-control" type="text" width="80%"  readonly><br>
+          提交用户:<input v-model="newOrder.username" class="form-control" type="text" width="80%" readonly><br>
+          收件人:<input v-model="newOrder.DI_name" class="form-control" type="text" width="80%" placeholder="DI_name"><br>
+          收货地址:<input v-model="newOrder.DI_position" class="form-control" type="text" width="80%" placeholder="DI_positionI"><br>
+          联系方式:<input v-model="newOrder.DI_phonenumber" class="form-control" type="text" width="80%" placeholder="DI_phonenumber"><br>
+          共计消费:<input v-model="newOrder.price" class="form-control" type="text" width="80%" placeholder="allCost" readonly><br>
+          是否支付:<input v-model="newOrder.isPaid" class="form-control" type="text" width="80%" placeholder="isPaid"><br>
+          书籍列表:<input v-model="newOrder.books_ISBN" class="form-control" type="text" width="80%" placeholder="books_ISBN" readonly><br>
+          优惠层:<input v-model="newOrder.num" class="form-control" type="text" width="80%" placeholder="num"><br>
+          时间:<input v-model="newOrder.date" class="form-control" type="text" width="80%" placeholder="date" readonly><br>
+          
+        </div>
+            <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <div>
+            <button v-on:click="updateOrder(newOrder,toUpdateOrderID)" type="button" class="btn btn-primary" data-dismiss="modal">修改</button>
+          </div>
+          
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <script>
+
+    var vm = new Vue({
+      el:"#app",
+      data(){
+        return{
+          adminUser:{
+            username:"网络未连接",
+            password:"",
+            email:"",
+            sex:"",
+            age:null,
+            level:0,
+          },
+          orders:null,
+          toUpdateOrderID:null,
+          newOrder:{
+            id:null,
+            username:null,
+            DI_name:null,
+            DI_position:null,
+            DI_phonenumber:null,
+            price:null,
+            isPaid:null,
+            books_ISBN:null,
+            num:null,
+            date:null,
+          },
+          isAdmin:false,
+
+          
+        }
+      },
+      created:async function(){
+        await this.isLogin();
+        await this.showAll();
+      },
+      methods:{
+        test:function(){
+
+        },
+
+        startUpdate:async function(toUpdateOrder){
+          this.toUpdateOrderID = toUpdateOrder;
+          await this.$http.post('/Servlet/OrderManagerServlet', {
+                    type:"findByID",
+                    ID:toUpdateOrder,
+                }, {emulateJSON: true}).then(function (res){
+                  this.newOrder = res.body[0];
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+        showAll: async function () {
+                //发送 post 请求
+                await this.$http.post('/Servlet/OrderManagerServlet', {
+                    type:"showAll",
+                }, {emulateJSON: true}).then(function (res){
+                  this.orders = res.body;
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+        deleteOrder: async function (deleteID) {
+                //发送 post 请求
+                await this.$http.post('/Servlet/OrderManagerServlet', {
+                    type:"deleteOrder",
+                    ID:deleteID,
+                }, {emulateJSON: true}).then(function (res){
+                  this.orders = res.body;
+                }, function (res) {
+                    console.log(res.status);
+                });
+                await this.showAll();
+        },
+        updateOrder:async function(newOrder,toUpdateOrder){
+          //发送 post 请求
+                await this.$http.post('/Servlet/OrderManagerServlet', {
+                    type:"updateOrder",
+                    addOrder:newOrder,
+                    id:toUpdateOrder,
+                }, {emulateJSON: true}).then(function (res){
+                  this.orders = res.body;   
+                }, function (res) {
+                    console.log(res.status);
+                });
+                this.newOrder = {
+                                    id:null,
+						            username:null,
+						            DI_name:null,
+						            DI_position:null,
+						            DI_phonenumber:null,
+						            price:null,
+						            isPaid:null,
+						            books_ISBN:null,
+						            num:null,
+						            date:null,
+                                  };
+                await this.showAll();
+        },
+        isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  if(res.body[0].isLogin != null){
+
+                    if(res.body[1].level > 0){
+                      this.isAdmin = true;
+                    }else{
+                      this.isAdmin = false;
+                      this.routeForUserWeb();
+                    }
+
+                    if((String(res.body[0].isLogin)).indexOf("true") == -1){
+                      this.routeForNewWeb();
+                    }else{
+                      this.adminUser = {
+                        username:res.body[1].username,
+                        password:res.body[1].password,
+                        email:res.body[1].email,
+                        sex:res.body[1].sex,
+                        age:res.body[1].age,
+                        level:res.body[1].level,
+                      }
+                    }
+                  }else{
+                    alert("您未登录，将直接跳转到登录页面");
+                    this.routeForNewWeb();
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+        routeForNewWeb:function(){
+          window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+        },
+        routeForUserWeb:function(){
+          window.location.href = '/Servlet/FontPage/pages/dashboard-userIndex.html'
+        },
+        logout: async function(){
+          await this.$http.post('/Servlet/UserManagerServlet', {
+                  type:"logout",
+                }, {emulateJSON: true}).then(function (res){
+                    window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+      }
+    })
+
+    $(function(){
+      'use strict';
+
+      $('.leftpanel, .main').perfectScrollbar();
+
+      $('#showLeft').on('click', function(){
+        if($('body').hasClass('show-left')) {
+          $('body').removeClass('show-left');
+        } else {
+          $('body').addClass('show-left');
+        }
+        return false;
+      });
+    });
+  </script>
+
+</body>
+</html>

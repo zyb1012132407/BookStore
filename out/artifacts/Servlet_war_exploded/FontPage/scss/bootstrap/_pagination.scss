@@ -1,0 +1,68 @@
+/*! ########## 3.18 Pagination ########## */
+.pagination {
+  .page-item {
+    .page-link { font-family: $font-family-roboto; }
+  }
+}
+
+.pagination-success { @include pagination-variant($brand-success); }
+.pagination-warning { @include pagination-variant($brand-warning); }
+.pagination-danger { @include pagination-variant($brand-danger); }
+.pagination-info { @include pagination-variant($brand-info); }
+.pagination-inverse { @include pagination-variant($brand-inverse); }
+.pagination-gray { @include pagination-variant($gray); }
+.pagination-gray-light { @include pagination-variant($gray-light); }
+
+.pagination-circle {
+  .page-item {
+    + .page-item { margin-left: 5px; }
+
+    .page-link {
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      @include border-radius(100%);
+    }
+
+    &.active {
+      .page-link { border-color: transparent; }
+    }
+  }
+}
+
+.pagination-rounded {
+  .page-item {
+    + .page-item { margin-left: 5px; }
+    .page-link { @include border-radius(); }
+  }
+}
+
+.pagination-circle,
+.pagination-rounded {
+  .page-item {
+    span.page-link {
+      border-color: transparent;
+      padding-left: 0;
+      padding-right: 0;
+      width: auto;
+    }
+
+    &.disabled .page-link { background-color: transparent; }
+  }
+}
+
+
+.pagination-dark {
+  .page-link {
+    background-color: transparent;
+    color: #fff;
+    border-color: rgba(#fff, .2);
+
+    &:hover,
+    &:focus {
+      background-color: $gray-dark;
+    }
+  }
+}

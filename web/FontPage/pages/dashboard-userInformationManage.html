@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>修改资料</title>
+
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/morris.js/morris.css" rel="stylesheet">
+  <link href="../lib/air-datepicker/datepicker.min.css" rel="stylesheet">
+  <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+  <link href="../css/blockbox.css" rel="stylesheet">
+  <link href="../css/line-awesome.min.css" rel="stylesheet">
+
+  <link href="../lib/imagehover.css/imagehover.css" rel="stylesheet">
+
+
+  <script src="../lib/jquery/jquery.js"></script>
+  <script src="../lib/tether/tether.js"></script>
+  <script src="../lib/bootstrap/bootstrap.js"></script>
+  <script src="../lib/raphael/raphael.min.js"></script>
+  <script src="../lib/moment/moment.js"></script>
+  <script src="../lib/chart.js/Chart.js"></script>
+  <script src="../lib/morris.js/morris.js"></script>
+  <script src="../lib/peity/jquery.peity.js"></script>
+  <script src="../lib/air-datepicker/datepicker.min.js"></script>
+  <script src="../lib/air-datepicker/datepicker.en.js"></script>
+  <script src="../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+
+
+  <script src="../js/blockbox.js"></script>
+  <script src="../js/blockbox.dashboard.js"></script>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+  <style>
+    /*v-cloak防止页面加载vue代码*/
+    [v-cloak] {
+        display: none !important;
+    }
+  </style>
+</head>
+
+<body class="dashboard-2 bg-gray-lighter tx-size-13">
+<div id="app" v-cloak>
+  <div class="headpanel pos-fixed-top bg-gray-dark ht-70 pd-lg-l-240 z-index-100 d-flex align-items-center justify-content-between">
+    <div class="headpanel-logo pos-absolute t-0 l-neg-240 l-lg-0 bg-gray-darker ht-70 wd-240 d-flex align-items-center pd-x-20">
+      <a href="index.html" class="tx-size-24 tx-medium tx-spacing-neg-4 tx-white">
+        <i class="fa fa-cube"></i> BookStore <span class="tx-light tx-info-light">dash</span>
+      </a>
+    </div><!-- headpanel-logo -->
+    <div class="pd-x-20 d-flex align-items-center">
+      <!-- <a id="showLeft" href="" class="tx-gray-light mg-r-auto hidden-lg-up"><i class="fa fa-navicon tx-size-20"></i></a>
+      <div class="input-group wd-sm-250 wd-md-300 mg-b-20 mg-sm-b-0 hidden-xs-down mg-l-20 mg-lg-l-0">
+        <input type="text" class="form-control bd-0 rounded-left-2" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary pd-r-15 bd-0 rounded-right-2" type="button"><i class="fa fa-search"></i></button>
+        </span>
+      </div> -->
+    </div>
+
+    <div class="pd-x-20">
+      <nav class="nav nav-inline align-items-center justify-content-end flex-row">
+        <a href="#" id="searchmenu" class="nav-link tx-white hidden-sm-up"><i class="fa fa-search"></i></a>
+        <a href="" class="nav-link tx-white pd-r-5 pos-relative mg-l-auto">
+          <i class="fa fa-envelope tx-size-16"></i>
+          <span class="pos-absolute t-10 r-0 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="nav-link tx-white mg-r-5 pos-relative">
+          <i class="fa fa-bell tx-size-16"></i>
+          <span class="pos-absolute t-10 r-10 square-8 bg-pink rounded-circle"></span>
+        </a>
+        <a href="" class="tx-white nav-link tx-size-13 pd-r-5 pd-md-r-10"><img v-bind:src="'/Servlet/file/image/user/' + user.username + '.png'" onerror="this.src='../image/user_default.png'" class="rounded-circle wd-32" alt=""></a>
+        <div class="dropdown">
+          <a href="" class="nav-link tx-white pd-x-0 tx-size-13" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="hidden-sm-down">{{user.username}} </span><i class="fa fa-angle-down mg-l-5"></i></a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-inverse bg-gray-darker tx-size-13 bd-0 mg-t-18 rounded-top-0 shadow-none">
+            <a class="dropdown-item" href="#"><i class=""></i> 修改资料</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userIndex.html">查看个人主页</a>
+            <a class="dropdown-item" href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html">账户设置</a>
+            <!-- <a class="dropdown-item" href="#">Privacy Settings</a> -->
+            <a v-on:click="logout" class="dropdown-item">登出</a>
+          </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+      </nav>
+    </div>
+  </div><!-- headpanel -->
+
+  <div class="leftpanel pos-fixed-left t-70 l-neg-240 l-lg-0 bg-info-light wd-240 pd-y-20">
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20">个人管理</h6>
+    <ul class="nav nav-gray-dark nav-stacked flex-column lh-10 wd-100p mg-t-10 tx-size-13">
+      <!-- <li class="nav-item">
+        <a href="#dashboard" class="nav-link"><i class="fa fa-home tx-center wd-16 mg-r-5"></i> Dashboard</a>
+      </li> -->
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userIndex.html" class="nav-link"><i class="fa fa-external-link-square wd-16 tx-center mg-r-5"></i> 个人主页</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link active"><i class="fa fa-mouse-pointer tx-center wd-16 mg-r-5"></i> 修改资料</a>
+      </li>
+      
+      <li class="nav-item">
+        <a href="dashboard-userOrderManage.html" class="nav-link"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userPrivacyManage.html" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 账户设置</a>
+      </li>
+    </ul>
+  <div v-if="isAdmin">
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">后台管理权限</h6>
+    <ul class="nav nav-gray-dark nav-stacked flex-column wd-100p mg-t-10 tx-size-13">
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-NoticeManage-Admin.html" class="nav-link"><i class="fa fa-pencil wd-16 tx-center mg-r-5"></i> 公告管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-userManage-Admin.html" class="nav-link"><i class="fa fa-file-text tx-center wd-16 mg-r-5"></i> 用户管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Servlet/FontPage/pages/dashboard-bookManage-Admin.html" class="nav-link"><i class="fa fa-navicon wd-16 tx-center mg-r-5"></i> 图书管理</a>
+      </li>
+      <li class="nav-item">
+        <a href="dashboard-OrderManage-Admin.html" class="nav-link"><i class="fa fa-th-list wd-16 tx-center mg-r-5"></i> 订单管理</a>
+      </li>
+    </ul>
+  </div>
+
+    <h6 class="tx-size-10 tx-uppercase tx-inverse tx-bold tx-spacing-2 pd-x-20 mg-t-20">版本信息</h6>
+    <p class="pd-x-20 tx-gray tx-size-12">仅供测试版本.</p>
+  </div><!-- leftpanel -->
+
+  <div class="main pos-fixed t-70 r-0 b-0 l-0 l-lg-240">
+    <div class="main-header pd-x-20 pd-y-30 bg-white d-sm-flex align-items-center justify-content-between">
+      <h5 class="tx-inverse tx-bold mg-b-0">修改资料</h5>
+      <nav class="breadcrumb pd-0 bg-transparent mg-b-0 tx-size-12 mg-t-5 mg-sm-t-0">
+        <a class="breadcrumb-item" href="#">个人管理</a>
+        <span class="breadcrumb-item active">修改资料</span>
+      </nav>
+    </div><!-- main-header -->
+    <div class="main-body pd-20">
+      <div class="row">
+        <div class="col-xl-8">
+
+          <div class="card card-block rounded-2 pd-25 bd-0 mg-t-20">
+            <div class="row">      
+              <div class="col-sm-6">
+                <h6 class="card-title tx-uppercase tx-size-12 tx-bold">修改信息</h6>
+
+                <div class="col-lg">
+                  <label for="inputUsername">用户名</label>
+                  <input v-bind:placeholder="user.username" id="inputUsername" type="text" class="form-control" readonly>
+                </div>
+                <div class="col-lg">
+                  <label for="input">性别</label>
+                  <!-- <input id="input" type="text" class="form-control" placeholder="性别" > -->
+                  <select v-model="user.sex" class="form-control select2 select2-hidden-accessible" data-placeholder="请选择性别" tabindex="-1" aria-hidden="true">
+                    <option value="">请选择性别</option>
+                    <option value="boy">男性</option>
+                    <option value="girl">女性</option>
+                  </select>
+                </div>
+                <div class="col-lg">
+                  <label for="inputAge">年龄</label>
+                  <input v-model="user.age" oninput = "value=value.replace(/[^\d]/g,'')" maxlength="2" id="inputAge" type="text" class="form-control" placeholder="年龄" >
+                </div>
+                <div class="col-lg">
+                  <label for="inputEmail">邮箱</label>
+                  <input v-bind:placeholder="user.email" id="inputEmail" type="text" class="form-control" readonly>
+                </div>
+                <div class="col-lg mg-t-10">
+                  <button v-on:click="updateUser(user,user.username)" class="btn btn-primary form-control">提交</button>
+                </div>
+              </div><!-- col-6 -->
+
+              <!-- <div class="col-sm-6 mg-t-20 mg-sm-t-0 d-flex align-items-center justify-content-center">
+                <span class="peity-donut" data-peity='{ "fill": ["#AC10ED", "#D8DCE3"],  "innerRadius": 60, "radius": 90 }'>60/100</span>
+              </div> --><!-- col-6 -->
+
+            </div><!-- row -->
+          </div><!-- card -->
+
+         <!--  <div class="card card-block rounded-2 pd-25 bd-0 mg-t-20">
+            <div class="row">      
+              <div class="col-sm-6">
+                <h6 class="card-title tx-uppercase tx-size-12 tx-bold">修改密码</h6>
+                <div class="col-lg">
+                  <label for="input">原始密码</label>
+                  <input id="input" type="text" class="form-control" placeholder="原始密码">
+                </div>
+                <div class="col-lg">
+                  <label for="input">新密码</label>
+                  <input id="input" type="text" class="form-control" placeholder="新密码">
+                </div>
+                <div class="col-lg">
+                  <label for="input">确认密码</label>
+                  <input id="input" type="text" class="form-control" placeholder="确认密码">
+                </div>
+                <div class="col-lg mg-t-10">
+                  <button class="btn btn-primary form-control">提交</button>
+                </div>
+                
+              </div>
+
+
+            </div>
+          </div> -->
+
+        </div><!-- col-8 -->
+
+        <div class="col-xl-4 mg-t-20 mg-lg-t-0">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              
+              <div class="card rounded-2 bd-0">
+
+                <div class="card-header pd-x-20 pd-y-15 d-xs-flex justify-content-between align-items-center">
+                  <h6 class="card-title tx-uppercase tx-size-11 tx-size-lg-12 tx-spacing-1 mg-b-0">我的头像</h6>
+                </div><!-- card-header -->
+
+                <div class="card-block mx-auto">
+
+                  <div>
+                   
+                    <figure class="imghvr-shutter-out-diag-2 mb20">
+                      <!-- <img src="http://via.placeholder.com/800x800" class="img-fluid" alt="Stock 2" style="width: 200px;height:200px "> -->
+                      <img v-bind:src="'/Servlet/file/image/user/' + user.username + '.png'" onerror="this.src='../image/user_default.png'" class="img-fluid" alt="Stock 2" style="width: 200px;height:200px ">
+                      <figcaption>
+                        <form action="/Servlet/UserImageServlet" method="post" enctype="multipart/form-data">
+                          <input v-bind:name="user.username"  type="text" readonly style="display:none;" />
+                          <h4 class="font-light">更换 <span class="font-medium">头像</span>!</h4>
+                          <p>更换你的头像吧!</p>
+                                    <input class="btn btn-white" id="file_real_input" type="file" name="myfile" style="display:none;">
+                                    <button class="btn btn-white mg-b-5 mx-auto" type="button" id="file_button_input">选择文件</button>
+                                    <input id="submit_input" class="btn btn-white mx-auto" type="submit" value="确定上传">
+
+                        </form>
+                        <!-- <h4 class="font-light">更换 <span class="font-medium">头像</span>!</h4>
+                        <p>开启全新的生活！</p>
+                        <button class="btn btn-white">上传头像</button> -->
+                      </figcaption>
+                    </figure>
+
+                  </div>
+
+                </div><!-- card-block -->
+              </div><!-- card -->
+            </div><!-- col -->
+
+
+            <div class="col-md-12 mg-t-20">
+
+              <div class="card card-block rounded-2 bd-0">
+                <div class="card-header pd-x-20 pd-y-15 d-xs-flex justify-content-between align-items-center">
+                  <h6 class="card-title tx-uppercase tx-size-11 tx-size-lg-12 tx-spacing-1 mg-b-0">今日日历</h6>
+                </div><!-- card-header -->
+                <div class="form-control-datepicker dp-col-4 dp-minimal" data-language="en"></div>
+              </div><!-- card -->       
+            </div><!-- col -->
+
+
+          </div><!-- row -->
+        </div><!-- col-3 -->
+      </div><!-- row -->
+    </div><!-- main-body -->
+  </div><!-- main -->
+</div>
+
+
+
+  <script>
+
+    var vm = new Vue({
+      el:"#app",
+      data(){
+        return{
+          user:{
+            username:"网络未连接",
+            password:"",
+            email:"",
+            sex:"",
+            age:null,
+            level:0,
+          },
+          isAdmin:false,
+
+          
+        }
+      },
+      created:async function(){
+        await this.isLogin();
+      },
+      methods:{
+        isLogin: async function(){
+              await this.$http.post('/Servlet/SessionGetServlet', {
+                  test:"true",
+                }, {emulateJSON: true}).then(function (res){
+                  if(res.body[0].isLogin != null){
+
+                    if(res.body[1].level > 0){
+                      this.isAdmin = true;
+                    }else{
+                      this.isAdmin = false;
+                    }
+                    // 这步现在无用，但是以后防止后端异常输出
+                    if((String(res.body[0].isLogin)).indexOf("true") == -1){
+                      this.routeForNewWeb();
+                    }else{
+                      this.user = {
+                        username:res.body[1].username,
+                        password:res.body[1].password,
+                        email:res.body[1].email,
+                        sex:res.body[1].sex,
+                        age:res.body[1].age,
+                        level:res.body[1].level,
+                      }
+                    }
+
+                  }else{
+                    alert("您未登录，将直接跳转到登录页面");
+                    this.routeForNewWeb();
+                  }       
+                }, function (res) {
+                    console.log(res.status);
+                });
+            },
+        routeForNewWeb:function(){
+          window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+        },
+        updateUser: async function(newUser,toUpdateUserName){
+          await this.$http.post('/Servlet/UserManagerServlet', {
+                  type:"updateUser",
+                  addUser:newUser,
+                  toUpdateUser:toUpdateUserName,
+                }, {emulateJSON: true}).then(function (res){
+                    window.location.href = '/Servlet/FontPage/pages/dashboard-userInformationManage.html';
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+        logout: async function(){
+          await this.$http.post('/Servlet/UserManagerServlet', {
+                  type:"logout",
+                }, {emulateJSON: true}).then(function (res){
+                    window.location.href = '/Servlet/FontPage/pages/sign-in.html';
+                }, function (res) {
+                    console.log(res.status);
+                });
+        },
+      }
+    })
+
+    $(function(){
+      'use strict';
+
+      $('.leftpanel, .main').perfectScrollbar();
+
+      $('#showLeft').on('click', function(){
+        if($('body').hasClass('show-left')) {
+          $('body').removeClass('show-left');
+        } else {
+          $('body').addClass('show-left');
+        }
+        return false;
+      });
+
+      $("#file_button_input").click(function () {
+            $("#file_real_input").click();
+      });
+      
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+/*! ########## 3.22 Tables ########## */
+
+.table {
+  thead,
+  tfoot {
+    > tr > th {
+      border-bottom: 0;
+      font-weight: 600;
+      color: $gray-dark;
+    }
+  }
+
+  .thead-colored {
+    > tr {
+      > th,
+      > td {
+        &:first-child { margin-left: -1px; }
+
+        font-weight: 500;
+        color: rgba(#fff, .75);
+        border-color: rgba(#fff, .2);
+        border-bottom-width: 0;
+      }
+    }
+
+    + tbody {
+      > tr:first-child {
+        > td,
+        > th { border-top-width: 0; }
+      }
+    }
+  }
+
+  .thead-primary { > tr { > th, > td { background-color: $brand-primary; } } }
+  .thead-success { > tr { > th, > td { background-color: $brand-success; } } }
+  .thead-warning { > tr { > th, > td { background-color: $brand-warning; } } }
+  .thead-danger  { > tr { > th, > td { background-color: $brand-danger;  } } }
+  .thead-info    { > tr { > th, > td { background-color: $brand-info;    } } }
+
+  tbody {
+    > tr > th {
+      color: $gray-dark;
+      font-weight: 600;
+    }
+  }
+}
+
+// Table Full Color Variations
+.table-colored {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-width: 0;
+  @include border-radius();
+
+  > thead > tr {
+    > th,
+    > td {
+      color: rgba(#fff, .75);
+      font-weight: 500;
+      border-width: 0;
+    }
+  }
+
+  > tbody > tr {
+    > th,
+    > td {
+      color: #fff;
+      border-color: rgba(#fff, .4);
+      border-left-width: 0;
+      border-top-width: 0;
+    }
+
+    &:first-child {
+      > th,
+      > td { border-top-width: 0; }
+    }
+
+    &:last-child {
+      > th,
+      > td { border-bottom-width: 0; }
+    }
+  }
+
+  &.rounded {
+    > thead > tr:first-child {
+      > th,
+      > td {
+        &:first-child { border-top-left-radius: $border-radius; }
+        &:last-child { border-top-right-radius: $border-radius; }
+      }
+    }
+
+    > tbody > tr:last-child {
+      > th,
+      > td {
+        &:first-child { border-bottom-left-radius: $border-radius; }
+        &:last-child { boder-bottom-right-radius: $border-radius; }
+      }
+    }
+  }
+}
+
+.table-inverse {
+  background-color: lighten($brand-inverse, 40%);
+  > thead > tr {
+    > th,
+    > td { background-color: $brand-inverse; }
+  }
+}
+
+.table-primary { @include table-full-colored-variant($brand-primary); }
+.table-success { @include table-full-colored-variant($brand-success); }
+.table-warning { @include table-full-colored-variant($brand-warning); }
+.table-danger  { @include table-full-colored-variant($brand-danger);  }
+.table-info    { @include table-full-colored-variant($brand-info);    }

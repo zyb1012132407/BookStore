@@ -1,0 +1,932 @@
+/*! ########## 5.4 Demo ########## */
+/*
+ * All classes below are considered part of the utilities classes
+ * that are not available there but manually added here.
+ *
+ * Class names below are named the same way with utilities classes
+ * so that this can be reuse anywhere in the template and not only
+ * for a specific theme file. You can also add your own style here
+ * if styles are not available both in utilities classes and here.
+ *
+ * Meanwhile, you are free to move all classes found below to be
+ * added in the utilities classes based from where they belong.
+ *
+*/
+
+// Borders and Radius
+.rounded-2 { border-radius: 2px; }
+.rounded-right-2 {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.rounded-left-2 {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+
+// Margins
+.mg-l-240 { margin-left: 240px; }
+.mg-l-320 { margin-left: 320px; }
+.mg-l-18 { margin-left: 18px; }
+.mg-t-16 { margin-top: 16px; }
+.mg-t-18 { margin-top: 18px; }
+.mg-t-19 { margin-top: 19px; }
+.mg-t-70 { margin-top: 70px; }
+.mg-t-120 { margin-top: 120px; }
+.mg-t-130 { margin-top: 130px; }
+.mg-t-140 { margin-top: 140px; }
+.mg-t-neg-100 { margin-top: -100px; }
+.mg-t-neg-200 { margin-top: -200px; }
+
+.mg-l-neg-5 { margin-left: -5px; }
+
+// Positions
+.t-2 { top: 2px; }
+.t-3 { top: 3px; }
+.t-4 { top: 4px; }
+.t-130 { top: 130px; }
+.t-140 { top: 140px; }
+.t-148 { top: 148px; }
+.r-240 { right: 240px; }
+.r-250 { right: 250px; }
+.b-62 { bottom: 62px; }
+.l-200 { left: 200px; }
+.l-220 { left: 220px; }
+.l-240 { left: 240px; }
+.l-260 { left: 260px; }
+.l-320 { left: 320px; }
+.l-540 { left: 540px; }
+
+
+.t-neg-2 { top: -2px; }
+.t-neg-3 { top: -3px; }
+.t-neg-30 { top: -30px; }
+.t-neg-70 { top: -70px; }
+.r-neg-240 { right: -240px; }
+.r-neg-250 { right: -250px; }
+.l-neg-200 { left: -200px; }
+.l-neg-220 { left: -220px; }
+.l-neg-240 { left: -240px; }
+.l-neg-260 { left: -260px; }
+
+// Widths
+.wd-220 { width: 220px; }
+.wd-240 { width: 240px; }
+.wd-260 { width: 260px; }
+.wd-320 { width: 320px; }
+.wd-1140 { width: 1140px; }
+
+.ht-110 { height: 110px; }
+.ht-120 { height: 120px; }
+
+.mn-ht-70 { min-height: 70px; }
+
+// Paddings
+.pd-y-12 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.pd-l-12 { padding-left: 12px; }
+.pd-l-240 { padding-left: 240px; }
+
+// Borders
+.bd-l-0-force { border-left: 0 !important; }
+.bd-r-0-force { border-right: 0 !important; }
+
+// Text Colors and Background Colors
+.bg-black-1 { background-color: darken($brand-inverse, 15%); }
+.bg-black-2 { background-color: darken($brand-inverse, 10%); }
+.bg-black-3 { background-color: #333; }
+.bg-info-light { background-color: $color-info-light; }
+
+.tx-info-light { color: $color-info-light; }
+
+// Image Background
+.bg-pattern {
+  background-image: url('../images/pattern.png');
+}
+
+.img-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.img-bg-band-1 { background-image: url('../images/img32.jpg'); }
+.img-bg-resto-1 { background-image: url('../images/img365.jpg'); }
+.img-bg-resto-2 { background-image: url('../images/img370.jpg'); }
+.img-bg-portfolio-1 { background-image: url('../images/img392.jpg'); }
+.img-bg-listing-1 { background-image: url('../images/img412.jpg'); }
+.img-bg-landing-2 { background-image: url('../images/img442.jpg'); }
+
+// Typograpphy
+.section-title-outline {
+  position: relative;
+  text-align: center;
+
+  span {
+    position: relative;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  &:after {
+    content: '';
+    border-bottom: 1px solid $gray-lighter;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+  }
+}
+
+
+// Custom Theme Styles
+.message-1 {
+  &.show-left-menu {
+    overflow: hidden;
+    .leftpanel { left: 0; }
+    .mainpanel,
+    .headpanel,
+    .typebox { transform: translate3d(260px,0,0); }
+  }
+
+  &.show-right-menu {
+    overflow: hidden;
+    .rightpanel { right: 0; }
+    .mainpanel,
+    .headpanel,
+    .typebox { transform: translate3d(-250px,0,0); }
+  }
+}
+
+.mailbox-1 {
+  .mail-list {
+    .mail-item {
+      position: relative;
+      cursor: pointer;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        border-left: 3px solid $gray-lighter;
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+
+    .active {
+      &::before {
+        opacity: 1;
+        border-left-color: $brand-primary;
+      }
+    }
+  }
+}
+
+.mailbox-2 {
+  .mail-list {
+    .mail-item {
+
+      &:hover,
+      &:focus {
+        background-color: $gray-lightest;
+      }
+
+      &.active {
+        color: #fff;
+        position: relative;
+        background-color: $brand-success;
+      }
+    }
+  }
+}
+
+.portfolio-1 {
+  .header { @include transition($transition-base); }
+  .portfolio-menu-open {
+    .header {
+      transform: translateX(260px);
+    }
+  }
+}
+
+.dashboard-2 {
+  .leftpanel {
+    .nav-link {
+      i {
+        font-size: 14px;
+        width: 16px;
+        margin-right: 5px;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: darken($color-info-light, 5%);
+      }
+
+      &.active {
+        &,&:hover,&:focus {
+          background-color: $brand-primary;
+        }
+      }
+    }
+  }
+
+  &.show-left {
+    .leftpanel { left: 0; }
+
+    .headpanel,
+    .main { @include transform(translateX(240px)); }
+  }
+}
+
+.dashboard-3 {
+  .leftbar nav > a {
+    color: $gray-light;
+
+    &:hover,
+    &:focus {
+      background-color: darken($gray-dark, 4%);
+      color: #fff;
+    }
+
+    &.active {
+      background-color: $gray-dark;
+      color: #fff;
+    }
+  }
+
+  .leftpanel {
+    .nav-link {
+      font-size: 13px;
+      color: $gray-light;
+      padding: 8px 15px;
+
+      &:hover,
+      &:focus { background-color: darken($gray-dark, 2%); }
+
+      &.active {
+        color: #fff;
+        background-color: darken($gray-dark, 3%);
+        @include border-radius(2px);
+      }
+    }
+  }
+
+  .headpanel,
+  .main { @include transition($transition-base); }
+}
+
+.dashboard-4 {
+  .leftpanel {
+    .nav .nav-link {
+      &:hover,
+      &:focus { background-color: lighten($gray-lightest, 2%); }
+
+      &.active {
+        color: $gray-dark;
+        background-color: $gray-lightest;
+
+        &::before { border-color: $color-orange; }
+      }
+    }
+  }
+
+  .main {
+    .input-group .form-control:focus { border-color: $gray-lighter; }
+  }
+
+  .nav-main {
+    .nav-link.active {
+      &::before {
+        bottom: -14px;
+        border-bottom-width: 2px;
+      }
+    }
+  }
+
+}
+
+.dashboard-5 {
+  .leftpanel {
+    .nav .nav-link {
+      &:hover,
+      &:focus {
+        background-color: darken($gray-dark, 2%);
+        color: $gray-lighter;
+      }
+
+      &.active {
+        color: #fff;
+        background-color: darken($gray-dark, 5%);
+
+        &::before { border-color: $brand-info; }
+      }
+    }
+  }
+
+  .main {
+    .input-group .form-control:focus { border-color: $gray-lighter; }
+  }
+
+  .nav-main {
+    .nav-link.active {
+      &::before {
+        bottom: -14px;
+        border-bottom-width: 2px;
+      }
+    }
+  }
+
+}
+
+
+.ecommerce-1 {
+  .headpanel,
+  .leftpanel,
+  .rightpanel { @include transition($transition-base); }
+
+  .leftpanel {
+    .nav-link {
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: $gray;
+
+      i {
+        font-size: 14px;
+        margin-right: 7px;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color-teal;
+        color: #fff;
+      }
+    }
+  }
+
+  .nav-owl {
+    .owl-prev,
+    .owl-next {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 1px solid darken($gray-lighter, 2%);
+      text-indent: 9999px;
+      overflow: hidden;
+      margin-left: 5px;
+      cursor: pointer;
+      @include transition($transition-base);
+      @include border-radius(2px);
+
+      &:before {
+        position: absolute;
+        font-family: 'FontAwesome';
+        font-size: 24px;
+        color: $gray-light;
+        top: -2px;
+        left: 15px;
+        z-index: 50;
+        text-indent: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: lighten($gray-lightest, 2%);
+        &::before { color: $gray; }
+      }
+    }
+
+    .owl-prev:before { content: '\f104 '; }
+    .owl-next:before { content: '\f105'; }
+  }
+}
+
+.listing-1 {
+  .headpanel,
+  .rightpanel,
+  .img-head,
+  .main {
+    @include transition($transition-base);
+  }
+
+  &.show-right {
+    overflow: hidden;
+
+    .headpanel,
+    .img-head,
+    .main {
+      @include transform(translateX(-240px));
+    }
+    .rightpanel { right: 0; }
+  }
+}
+
+.photography-1 {
+  &.show-nav {
+    .navbar {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      left: 0;
+      background-color: darken($brand-inverse, 5%);
+      padding: 25px 10px;
+    }
+  }
+}
+
+.res-menu {
+  .headpanel {
+    @include transition($transition-base);
+
+    .nav-link.active::before {
+      @include transition($transition-base);
+      border-bottom-width: 2px;
+      bottom: 2px;
+    }
+
+    .nav {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      left: 0;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 15px 12px;
+      border-top: 1px solid $gray-lighter;
+      border-bottom: 1px solid $gray-lighter !important;
+      @include transition($transition-base);
+
+      .nav-item + .nav-item { margin-top: 5px; }
+      .nav-link { display: inline-block; }
+    }
+  }
+
+  .head-scroll {
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+    @include transition($transition-base);
+
+    .nav-link.active::before {
+      @include transition($transition-base);
+    }
+  }
+}
+
+.agency-1,
+.agency-2 {
+  .leftpanel { box-shadow: 2px 0 3px rgba(#000, .06); }
+}
+
+.agency-3 {
+  .headpanel { height: 70px; }
+  .head-scroll { height: 70px; }
+}
+
+.blog-2 {
+  .nav-outline {
+    .nav-link.active::before {
+      top: -15px;
+      bottom: auto;
+    }
+  }
+}
+
+.corporate-2 {
+  .headpanel { @include transition($transition-base); }
+
+  .hedad-scroll,
+  .head-scrolled {
+    position: fixed;
+  }
+
+  .head-scroll { top: -100px; }
+  .head-scrolled {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    -webkit-box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+    @include border-radius(0);
+  }
+}
+
+.corporate-3 {
+  .headpanel {
+    .nav-outline {
+      .nav-link {
+        color: rgba(#fff,.75);
+        &.active {
+          color: #fff;
+          &::before {
+            bottom: -19px;
+            border-bottom-width: 3px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.landing-3 {
+  .header-home { background-color: #d7e3f0; }
+}
+
+.landing-4,
+.landing-5,
+.landing-6 {
+  .headpanel { border-bottom: 1px solid rgba(#fff,0.1); }
+
+  &.head-scroll .headpanel {
+    background-color: #fff;
+
+    h5 > a { color: $gray-dark !important; }
+    .nav-link { color: $gray-dark; }
+    .show-nav { color: $gray-dark !important; }
+  }
+}
+
+// mega menu demo used in landing-9 and landing10
+.nav-dropdown {
+  &.nav-hover-primary {
+    .dropdown.show > a {  color: $brand-primary; }
+  }
+
+  //adding fade effect to dropdown menu
+  .dropdown {
+    > .dropdown-menu {
+      display: block;
+      opacity: 0;
+      top: -10000px;
+      margin-top: -2px;
+      border-top: 0;
+      @include transition($transition-base);
+    }
+  }
+
+  .show {
+    > .dropdown-menu {
+      display: block;
+      opacity: 1;
+      top: auto;
+      @include transition($transition-base);
+    }
+  }
+}
+
+@media (min-width: 480px) {
+  // do something for 480px
+}
+
+@media (max-width: 575px) {
+  .dashboard-1 {
+    .show-search {
+      .toppanel { top: 0; }
+      .main { padding-top: 155px; }
+    }
+  }
+
+  .mailbox-1,
+  .mailbox-2 {
+    &.show-left {
+      .logopanel,
+      .leftpanel,
+      .profilepanel,
+      .listpanel { transform: translateX(220px); }
+    }
+  }
+
+  .mailbox-2.show-left {
+    .leftpanel { border-right: 1px solid $gray-lighter; }
+    .header { transform: translateX(220px); }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .corporate-2 {
+    .nav-mobile {
+      background-color: #fff;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 65px;
+      padding: 5px 15px 20px;
+      @include border-bottom-radius(3px);
+    }
+
+    .head-scrolled .nav-mobile { @include border-bottom-radius(0); }
+  }
+
+  .corporate-3 {
+    .headpanel {
+      .nav-mobile {
+        background-color: lighten($color-pink, 3%);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70px;
+        padding: 20px 15px;
+
+        .nav-link.active::before {
+          border-bottom-width: 0;
+          border-left: 3px solid #fff;
+          top: 5px;
+          bottom: 5px;
+          left: -15px;
+        }
+      }
+    }
+  }
+
+  .landing-3 {
+    .headpanel {
+      .nav-mobile {
+        background-color: lighten($brand-primary, 3%);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70px;
+        padding: 20px 15px;
+
+        .nav-link.active::before {
+          border-bottom-width: 0;
+          border-left: 3px solid #fff;
+          top: 5px;
+          bottom: 5px;
+          left: -15px;
+        }
+      }
+    }
+  }
+
+  .landing-4,
+  .landing-5,
+  .landing-6 {
+    .headpanel {
+      .nav-mobile {
+        background-color: rgba(darken($gray-dark, 5%),.95);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70px;
+        padding: 20px 15px;
+
+        .nav-link.active::before {
+          border-bottom-width: 0;
+          border-left: 3px solid #fff;
+          top: 5px;
+          bottom: 5px;
+          left: -15px;
+        }
+      }
+    }
+
+    &.head-scroll {
+      .headpanel {
+        .nav-mobile {
+          background-color: #fff;
+          border-top: 1px solid $gray-lightest;
+          border-bottom: 1px solid $gray-lightest;
+
+          .nav-link.active::before {
+            border-left: 3px solid $gray-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  // do something for sm
+  .t-sm-0 { top: 0; }
+  .t-sm-50 { top: 50px; }
+  .l-sm-0 { left: 0; }
+  .l-sm-220 { left: 220px; }
+
+  .t-sm-neg-30 { top: -30px; }
+
+  .mg-sm-t-140 { margin-top: 140px; }
+  .mg-sm-t-170 { margin-top: 170px; }
+
+  .ht-sm-300 { height: 300px; }
+}
+
+@include media-breakpoint-down(md) {
+
+  .show-sf-menu {
+    overflow: hidden;
+    .headpanel {
+      .container {
+        overflow-y: auto;
+        height: 100vh;
+      }
+    }
+  }
+
+  .agency-1,
+  .agency-2 {
+    &.show-left {
+      overflow: hidden;
+
+      .show-left-menu,
+      .leftpanel,
+      .main { transform: translateX(240px); }
+    }
+  }
+
+  .dashboard-1 {
+    &.show-left-menu { transform: translateX(240px); }
+  }
+
+  .dashboard-4,
+  .dashboard-5 {
+    &.show-left {
+      overflow: hidden;
+      .main,
+      .mobile-head { transform: translateX(240px); }
+    }
+  }
+
+  .landing-2 {
+    &.show-nav {
+      .headpanel {
+        .nav {
+          background-color: #fff;
+          padding: 20px 15px;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          -webkit-box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+          box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+
+  .t-md-neg-50 { top: -50px; }
+  .ht-md-750 { height: 750px; }
+  .pd-md-t-120 { padding-top: 120px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+  .hidden-md-only { display: none !important; }
+}
+
+@include media-breakpoint-down(lg) {
+  .dashboard-3 {
+    &.show-left {
+      overflow: hidden;
+      .headpanel,
+      .main { transform: translateX(320px); }
+    }
+  }
+
+  .dashboard-4,
+  .dashboard-5 {
+    &.show-right {
+      overflow: hidden;
+      .main,
+      .mobile-head { transform: translateX(-240px); }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  // do something for lg
+  .mg-lg-l-240 { margin-left: 240px; }
+  .pd-lg-l-240 { padding-left: 240px; }
+
+  .t-lg-50 { top: 50px; }
+  .t-lg-70 { top: 70px; }
+  .r-lg-0 { right: 0; }
+  .r-lg-250 { right: 250px; }
+  .l-lg-0 { left: 0; }
+  .l-lg-240 { left: 240px; }
+
+  .t-lg-neg-95 { top: -95px; }
+  .t-lg-neg-70 { top: -70px; }
+
+  .ht-lg-300 { height: 300px; }
+  .ht-lg-500 { height: 500px; }
+  .ht-lg-700 { height: 700px; } //use in blog-2 header
+  .ht-lg-750 { height: 750px; }
+  .ht-lg-auto { height: auto; }
+
+  .message-1 {
+    &.show-left-menu {
+      .rightpanel { transform: translate3d(250px,0,0); }
+    }
+  }
+
+  .res-menu {
+    .headpanel {
+      .nav {
+        background-color: transparent;
+        position: relative;
+        flex-direction: row;
+        top: auto;
+        left: auto;
+        right: auto;
+        padding: 0;
+        border-top: 0;
+        border-bottom: 0 !important;
+
+        .nav-item + .nav-item { margin-top: 0; }
+      }
+    }
+
+    .head-scroll {
+      .nav-link.active::before { bottom: -18px; }
+    }
+  }
+
+  .agency-3 {
+    .headpanel { height: 100px; }
+    .head-scroll { height: 70px; }
+  }
+
+  .dashboard-4,
+  .dashboard-5 {
+    &.show-left {
+      .leftpanel { left: -240px; }
+      .main,
+      .mobile-head { left: 0; }
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  // do something for xl
+  .t-xl-50 { top: 50px; }
+  .r-xl-0 { right: 0; }
+  .r-xl-240 { right: 240px; }
+  .r-xl-250 { right: 250px; }
+  .l-xl-0 { left: 0; }
+  .l-xl-240 { left: 240px; }
+  .l-xl-260 { left: 260px; }
+  .l-xl-320 { left: 320px; }
+  .l-xl-540 { left: 540px; }
+
+  .t-xl-neg-50 { top: -50px; } // used in corporate-2
+
+  .mg-xl-l-neg-5 { margin-left: -5px; }
+  .mg-xl-t-neg-100 { margin-left: -100px; }
+
+  .wd-xl-320 { width: 320px; }
+  .wd-xl-540 { width: 540px; }
+  .wd-xl-1140 { width: 1140px; }
+
+  //custom style for demo
+  .dashboard-3 {
+    &.hide-left {
+      .headpanel,
+      .main { left: 70px; }
+    }
+  }
+
+  .corporate-2 {
+    .head-scrolled {
+      .container {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .dashboard-4,
+  .dashboard-5 {
+    &.show-left {
+      .leftpanel { left: 0; }
+      .main { left: 240px; }
+      .mobile-head { left: 0; }
+    }
+  }
+}

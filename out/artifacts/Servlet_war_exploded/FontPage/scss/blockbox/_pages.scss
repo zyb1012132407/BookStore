@@ -1,0 +1,184 @@
+/*! ########## 5.3 Pages ########## */
+// All styles that used under /pages folder files
+
+// Found in pages/signin_2.html
+.bg-img-placehold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url('http://via.placeholder.com/2340x1560');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: $color-teal;
+}
+
+.bg-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url('../images/img208.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: $color-teal;
+}
+
+.bg-img2 {
+  background-image: url('../images/img108.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: $gray-dark;
+}
+
+
+// LINK LIST
+// Used in pages.html and all pages under pages/ folder
+.link-list {
+  a {
+    font-size: 13px;
+    color: $gray;
+    display: block;
+    padding: 3px 0;
+
+    &:hover,
+    &:focus {
+      color: $brand-info;
+    }
+  }
+
+  .active a {
+    color: $brand-info;
+  }
+}
+
+
+// SHOP ITEMS
+// Used in shop pages
+.shop-item {
+  position: relative;
+  img {
+    margin-top: 5px;
+    @include transition(opacity .35s); }
+
+  .overlay-block {
+    opacity: 0;
+    @include transform(translateY(-40px));
+    @include transition(opacity .35s, transform .35s);
+  }
+
+  .shop-item-button {
+    opacity: 0;
+    @include transform(translateY(100px));
+    @include transition(opacity .35s, transform .35s);
+  }
+
+  &:hover {
+    img { opacity: .5; }
+
+    .overlay-block {
+      @include transform(translateY(0));
+      opacity: 1;
+    }
+
+    .shop-item-button {
+      opacity: 1;
+      @include transform(translateY(0));
+    }
+  }
+}
+
+.shop-item-button {
+  margin-bottom: 50px;
+  //background-color: rgba(#fff, .75);
+  padding: 20px 0;
+  @include border-radius();
+
+
+
+  .btn {
+    font-size: 10px;
+    font-weight: 500;
+    font-family: $font-family-rubik;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 12px 15px;
+
+    i {
+      font-size: $font-size-xs;
+      line-height: 0;
+    }
+  }
+}
+
+.quick-view-button {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: rgba($brand-inverse, .75);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 11px; //$font-size-sm;
+  font-family: $font-family-rubik;
+  color: #fff;
+  padding: 12px 15px;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: rgba($brand-inverse, .9);
+  }
+
+  .fa,
+  .icon {
+    font-size: 12px;
+    margin-right: 5px;
+    vertical-align: baseline;
+    position: relative;
+  }
+}
+
+//square element
+.square-6 {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+}
+
+.square-8 {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+.square-10 {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+
+//custom background for header
+.bg-img {
+  background-color: $gray-lightest;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.bg-img-1 { background-image: url('../images/img289.jpg'); }
+.bg-img-2 { background-image: url('../images/img294.jpg'); }
+.bg-img-3 { background-image: url('../images/img318.jpg'); }

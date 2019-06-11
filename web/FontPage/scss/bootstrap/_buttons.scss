@@ -1,0 +1,90 @@
+/*! ########## 3.3 Buttons ########## */
+
+.btn {
+  font-family: $font-family-base;
+  font-size: $font-size-sm;
+
+  &:hover,
+  &:focus { cursor: pointer; }
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.btn-default {
+  background-color: $gray-lighter;
+  border: 1px solid darken($gray-lighter,12%);
+}
+
+.btn-icon {
+  padding: 9px 0;
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-icon-sm {
+  width: 30px;
+  height: 30px;
+  padding: 7px 0;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-secondary {
+  border-color: $gray-lighter;
+}
+
+.btn-rounded { @include border-radius(50px); }
+.btn-noborder { border-color: transparent; }
+
+// Color variant
+// button-variant(textcolor, bgcolor, bordercolor);
+// button-outline-variant(color);
+.btn-white { @include button-variant($black, #fff, #fff); }
+.btn-inverse { @include button-variant(#fff, $gray-dark, darken($gray-dark, 2%)); }
+.btn-gray { @include button-variant(#fff, $gray, darken($gray, 2%)); }
+.btn-gray-light { @include button-variant(#fff, $gray-light, darken($gray-light, 2%)); }
+.btn-pink { @include button-variant(#fff, $color-pink, darken($color-pink, 5%)); }
+.btn-yellow { @include button-variant(#000, $color-yellow, darken($color-yellow, 5%)); }
+.btn-orange { @include button-variant(#fff, $color-orange, darken($color-orange, 5%)); }
+.btn-maroon { @include button-variant(#fff, $color-maroon, darken($color-maroon, 5%)); }
+.btn-teal { @include button-variant(#fff, $color-teal, darken($color-teal, 5%)); }
+.btn-turquiose { @include button-variant(#fff, $color-turquiose, darken($color-turquiose, 5%)); }
+.btn-gray-lighter { @include button-variant($gray-dark, $gray-lighter, darken($gray-lighter, 5%)); }
+
+.btn-outline-inverse { @include button-outline-variant($gray-dark); }
+.btn-outline-pink { @include button-outline-variant($color-pink); }
+.btn-outline-yellow { @include button-outline-variant($color-yellow); }
+.btn-outline-orange { @include button-outline-variant($color-orange); }
+.btn-outline-maroon { @include button-outline-variant($color-maroon); }
+.btn-outline-teal { @include button-outline-variant($color-teal); }
+.btn-outline-gray-lighter { @include button-outline-variant($gray-lighter); }
+.btn-outline-gray-light { @include button-outline-variant($gray-light); }
+.btn-outline-gray { @include button-outline-variant($gray); }
+
+.btn-outline-white {
+  @include button-outline-variant(#fff);
+  opacity: .75;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: transparent;
+    opacity: 1;
+  }
+}
+
+.btn-primary,
+.btn-success,
+.btn-warning,
+.btn-info,
+.btn-danger,
+.btn-inverse {
+  &:active {
+    color: #fff;
+  }
+}

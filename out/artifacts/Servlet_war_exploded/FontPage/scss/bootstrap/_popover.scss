@@ -1,0 +1,76 @@
+/*! ########## 3.19 Popover ########## */
+
+.popover {
+  font-size: $font-size-xs;
+  background-color: transparent;
+  padding: 0;
+  @include border-radius();
+
+  &.popover-bottom::after,
+  &.bs-tether-element-attached-top::after {
+    border-bottom-color: #fff;
+  }
+
+  &.popover-bottom {
+    .popover-title::before { display: none; }
+  }
+}
+
+.popover-title {
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  color: $gray-dark;
+  background-color: transparent;
+}
+
+.popover-content p:last-child { margin-bottom: 0;}
+
+.popover-title-gray-lightest {
+  .popover-title { background-color: $gray-lightest; }
+
+  &.popover-bottom::after,
+  &.bs-tether-element-attached-top::after {
+    border-bottom-color: $gray-lightest;
+  }
+}
+
+.popover-title {
+  padding: 12px 15px;
+  &::before { display: none; }
+}
+
+.popover-primary { .popover-title { color: $brand-primary; } }
+.popover-success { .popover-title { color: $brand-success; } }
+.popover-warning { .popover-title { color: $brand-warning; } }
+.popover-danger  { .popover-title { color: $brand-danger; } }
+.popover-info    { .popover-title { color: $brand-info; } }
+
+.popover-full-gray-lightest {
+  background-color: $gray-lightest;
+
+  .popover-title { border-color: transparent; }
+
+  &.popover-top::after,
+  &.bs-tether-element-attached-bottom::after {
+    border-top-color: $gray-lightest;
+  }
+
+  &.popover-bottom::after,
+  &.bs-tether-element-attached-top::after {
+    border-bottom-color: $gray-lightest;
+  }
+}
+
+.popover-title-primary { @include popover-title-variant($brand-primary); }
+.popover-title-success { @include popover-title-variant($brand-success); }
+.popover-title-warning { @include popover-title-variant($brand-warning); }
+.popover-title-danger  { @include popover-title-variant($brand-danger);  }
+.popover-title-info    { @include popover-title-variant($brand-info);    }
+.popover-title-inverse { @include popover-title-variant($brand-inverse); }
+
+.popover-full-primary       { @include popover-full-variant($brand-primary); }
+.popover-full-success       { @include popover-full-variant($brand-success); }
+.popover-full-warning       { @include popover-full-variant($brand-warning); }
+.popover-full-danger        { @include popover-full-variant($brand-danger);  }
+.popover-full-info          { @include popover-full-variant($brand-info);    }
+.popover-full-inverse       { @include popover-full-variant($brand-inverse); }
